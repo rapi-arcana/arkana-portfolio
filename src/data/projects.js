@@ -1,16 +1,12 @@
-// Resolve real user project image assets from src/assets/images/projects/ using Vite URL resolution
-const getAssetUrl = (relativePath) => {
-  return new URL(relativePath, import.meta.url).href
-}
+// Import real user project image assets using standard Vite static imports
+import kostCover from '../assets/images/projects/kost-management/cover.jpg'
+import kostScreen01 from '../assets/images/projects/kost-management/screen-01.jpg'
+import kostScreen02 from '../assets/images/projects/kost-management/screen-02.jpg'
+import kostScreen03 from '../assets/images/projects/kost-management/screen-03.jpg'
 
-const kostCover = getAssetUrl('../assets/images/projects/kost-management/cover.jpg')
-const kostScreen01 = getAssetUrl('../assets/images/projects/kost-management/screen-01.jpg')
-const kostScreen02 = getAssetUrl('../assets/images/projects/kost-management/screen-02.jpg')
-const kostScreen03 = getAssetUrl('../assets/images/projects/kost-management/screen-03.jpg')
-
-const bafainCover = getAssetUrl('../assets/images/projects/bafain/cover.jpg')
-const bafainScreen01 = getAssetUrl('../assets/images/projects/bafain/screen-01.jpg')
-const bafainScreen02 = getAssetUrl('../assets/images/projects/bafain/screen-02.jpg')
+import bafainCover from '../assets/images/projects/bafain/cover.jpg'
+import bafainScreen01 from '../assets/images/projects/bafain/screen-01.jpg'
+import bafainScreen02 from '../assets/images/projects/bafain/screen-02.jpg'
 
 const projects = [
   {
