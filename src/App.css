@@ -193,15 +193,6 @@
 }
 
 @media (max-width: 47.999rem) {
-  .site-nav {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .site-nav ul {
-    gap: var(--space-3);
-  }
-
   .grid--two-column {
     grid-template-columns: 1fr;
   }

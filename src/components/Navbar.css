@@ -193,9 +193,12 @@
   }
 
   .site-nav {
-    min-height: 64px;
-    padding: 0.625rem 1rem;
+    min-height: 58px;
+    padding: 0 clamp(0.875rem, 3vw, 1rem);
     border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 0;
   }
@@ -203,27 +206,34 @@
   .site-mark {
     display: inline-flex;
     align-items: center;
-    height: 44px;
+    height: 58px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
     font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     color: var(--color-text);
   }
 
-  /* Show the mobile actions: [ Theme Toggle ] [ Hamburger ] */
+  /* Show the mobile actions: [ Theme Toggle ] [ Hamburger ] on the right */
   .site-nav-mobile-actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    height: 58px;
     margin-left: auto;
   }
 
-  /* Compact button styling (44x44px within 42–46px target) */
+  /* Compact button styling (34–36px square) */
   .site-nav-mobile-actions .theme-toggle,
   .mobile-menu-toggle {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-md);
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
     color: var(--color-text);
@@ -250,16 +260,21 @@
     transform: scale(0.94);
   }
 
+  .site-nav-mobile-actions .theme-toggle .theme-toggle-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
   /* Hamburger Icon with three horizontal lines */
   .mobile-menu-toggle {
     flex-direction: column;
-    gap: 4.5px;
+    gap: 4px;
     padding: 0;
   }
 
   .hamburger-line {
     display: block;
-    width: 20px;
+    width: 16px;
     height: 1.5px;
     background-color: var(--color-text);
     border-radius: 1px;
@@ -272,7 +287,7 @@
 
   /* Smooth animation to X when mobile menu is open */
   .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(5.5px) rotate(45deg);
   }
 
   .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
@@ -281,7 +296,7 @@
   }
 
   .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-5.5px) rotate(-45deg);
   }
 
   /* Hide the desktop theme toggle inside actions panel */
@@ -294,9 +309,9 @@
     display: none;
     flex-basis: 100%;
     align-items: stretch;
-    padding-top: 1rem;
+    padding: 0.75rem 0 0.875rem;
     border-top: 1px solid var(--color-border);
-    margin-top: 0.625rem;
+    margin-top: 0;
   }
 
   .site-nav-content--open {
