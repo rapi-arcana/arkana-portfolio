@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Work / Portfolio Archive Page Styling
+   ========================================================================== */
+
+.work-page {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+/* --------------------------------------------------------------------------
+   Page Header
+   -------------------------------------------------------------------------- */
+
+.work-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 56ch;
+}
+
+.work-page-eyebrow {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.work-page-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-2);
+}
+
+.work-page-description {
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Filter Row — Filters + Project Count
+   -------------------------------------------------------------------------- */
+
+.project-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* Filter bar — horizontal scrollable on mobile */
+.project-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  /* Allow horizontal scroll on mobile without wrapping */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  /* Prevent scrollbar from taking layout space */
+  padding-bottom: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-filter-bar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Individual filter button */
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 2.25rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
+}
+
+.filter-btn--active {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+}
+
+.filter-btn--active:hover {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: none;
+}
+
+/* Project count badge */
+.project-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--text-small);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Projects Grid & Content Area
+   -------------------------------------------------------------------------- */
+
+.work-projects-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+.work-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.work-empty-state {
+  padding: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-body);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+
+/* Tablet: 2-column grid */
+@media (min-width: 48rem) {
+  .work-projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 4vw, 3.5rem);
+  }
+}
+
+/* Mobile: keep filter row together but allow count to stack */
+@media (max-width: 47.9375rem) {
+  .project-filter-row {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  /* Count badge always visible, but can shrink */
+  .project-count-badge {
+    flex-shrink: 0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .filter-btn {
+    transition: none !important;
+  }
+
+  .filter-btn:hover {
+    transform: none;
+  }
+}

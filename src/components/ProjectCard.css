@@ -1,0 +1,639 @@
+/* ==========================================================================
+   Project Card Component Styling
+   ========================================================================== */
+
+/* Base Project Card Container */
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: none;
+  overflow: visible;
+  transition:
+    transform 500ms cubic-bezier(0.34, 1.25, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.project-card:hover {
+  /* Remove outer card hover effects */
+}
+
+.project-card-link-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  overflow: visible;
+}
+
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Project Visual Stage
+   -------------------------------------------------------------------------- */
+
+.project-visual-stage {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: visible;
+  background-color: transparent;
+  transition: none;
+}
+
+/* Ambient Soft Indigo Glow */
+.folder-ambient-glow {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 95px;
+  background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.35) 0%, rgba(108, 99, 255, 0.08) 55%, transparent 78%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.project-card:hover .folder-ambient-glow {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* Layered Spilled Files Container */
+.project-files {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* Individual File Preview Cards */
+.file {
+  position: absolute;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform 600ms cubic-bezier(0.34, 1.25, 0.64, 1),
+    box-shadow 600ms ease,
+    border-color 600ms ease,
+    background-color 600ms ease;
+  will-change: transform;
+}
+
+.file-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  background-color: #1a1b23;
+}
+
+.file-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Project-Specific Spilled File Positioning
+   -------------------------------------------------------------------------- */
+
+/* Kost Management App */
+.project-card[data-project="kost-management-app"] .file-left {
+  width: 30%;
+  aspect-ratio: 9 / 18;
+  bottom: 30px;
+  left: 12%;
+  transform: rotate(-6deg) translateY(0);
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.project-card[data-project="kost-management-app"] .file-right {
+  width: 30%;
+  aspect-ratio: 9 / 18;
+  bottom: 26px;
+  right: 12%;
+  transform: rotate(6deg) translateY(0);
+  z-index: 2;
+  transition-delay: 50ms;
+}
+
+.project-card[data-project="kost-management-app"] .file-center {
+  width: 38%;
+  aspect-ratio: 9 / 18;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+  transition-delay: 100ms;
+}
+
+/* PT. Bafain Indonesia */
+.project-card[data-project="pt-bafain-indonesia"] .file-left {
+  width: 80%;
+  aspect-ratio: 16 / 9;
+  bottom: 60px;
+  left: 5%;
+  transform: rotate(-2deg) translateY(0);
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.project-card[data-project="pt-bafain-indonesia"] .file-right {
+  width: 26%;
+  aspect-ratio: 9 / 16;
+  bottom: 50px;
+  right: 8%;
+  transform: rotate(4deg) translateY(0);
+  z-index: 2;
+  transition-delay: 60ms;
+}
+
+.project-card[data-project="pt-bafain-indonesia"] .file-center {
+  display: none;
+}
+
+/* PESMABA Fakultas Teknik */
+.project-card[data-project="pesmaba-fakultas-teknik"] .file-left {
+  width: 36%;
+  aspect-ratio: 3 / 4;
+  bottom: 60px;
+  left: 10%;
+  transform: rotate(-5deg) translateY(0);
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.project-card[data-project="pesmaba-fakultas-teknik"] .file-right {
+  width: 36%;
+  aspect-ratio: 3 / 4;
+  bottom: 60px;
+  right: 10%;
+  transform: rotate(5deg) translateY(0);
+  z-index: 2;
+  transition-delay: 50ms;
+}
+
+.project-card[data-project="pesmaba-fakultas-teknik"] .file-center {
+  width: 44%;
+  aspect-ratio: 3 / 4;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+  transition-delay: 100ms;
+}
+
+/* Himpunan Kominfo */
+.project-card[data-project="himpunan-kominfo"] .file-left {
+  width: 38%;
+  aspect-ratio: 3 / 4;
+  bottom: 60px;
+  left: 8%;
+  transform: rotate(-4deg) translateY(0);
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.project-card[data-project="himpunan-kominfo"] .file-right {
+  width: 38%;
+  aspect-ratio: 3 / 4;
+  bottom: 60px;
+  right: 8%;
+  transform: rotate(4deg) translateY(0);
+  z-index: 2;
+  transition-delay: 50ms;
+}
+
+.project-card[data-project="himpunan-kominfo"] .file-center {
+  width: 46%;
+  aspect-ratio: 3 / 4;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+  transition-delay: 100ms;
+}
+
+/* YourMoney */
+.project-card[data-project="yourmoney"] .file-left {
+  width: 30%;
+  aspect-ratio: 9 / 18;
+  bottom: 30px;
+  left: 12%;
+  transform: rotate(-6deg) translateY(0);
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.project-card[data-project="yourmoney"] .file-right {
+  width: 30%;
+  aspect-ratio: 9 / 18;
+  bottom: 26px;
+  right: 12%;
+  transform: rotate(6deg) translateY(0);
+  z-index: 2;
+  transition-delay: 50ms;
+}
+
+.project-card[data-project="yourmoney"] .file-center {
+  width: 38%;
+  aspect-ratio: 9 / 18;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+  transition-delay: 100ms;
+}
+
+/* Desktop Hover Spill Animation */
+@media (min-width: 48rem) {
+  .project-card:hover .file-left {
+    transform: translate(-10px, -14px) rotate(-6deg);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .project-card:hover .file-right {
+    transform: translate(10px, -18px) rotate(6deg);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
+  }
+
+  .project-card:hover .file-center {
+    transform: translate(-50%, -20px) rotate(-1deg);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Mobile Pre-spilled Default State & Upward File Depth Adjustment */
+@media (max-width: 47.9375rem) {
+  .project-visual-stage {
+    height: 310px;
+  }
+
+  .project-files {
+    height: 100%;
+  }
+
+  .file-img {
+    object-fit: contain;
+  }
+
+  /* 481px – 767px: Moderate upward movement */
+  .file-left {
+    transform: translate(-8px, -38px) rotate(-4deg);
+  }
+
+  .file-right {
+    transform: translate(8px, -42px) rotate(4deg);
+  }
+
+  .file-center {
+    transform: translate(-50%, -46px) rotate(0deg);
+  }
+}
+
+/* ≤ 480px: Stronger upward movement for compact mobile screens */
+@media (max-width: 30rem) {
+  .project-visual-stage {
+    height: 295px;
+  }
+
+  .file-left {
+    transform: translate(-6px, -48px) rotate(-3deg);
+  }
+
+  .file-right {
+    transform: translate(6px, -52px) rotate(3deg);
+  }
+
+  .file-center {
+    transform: translate(-50%, -58px) rotate(0deg);
+  }
+}
+
+/* ≤ 360px: Tightened horizontal offset for ultra-narrow mobile */
+@media (max-width: 22.5rem) {
+  .file-left {
+    transform: translate(-4px, -46px) rotate(-2deg);
+  }
+
+  .file-right {
+    transform: translate(4px, -50px) rotate(2deg);
+  }
+
+  .file-center {
+    transform: translate(-50%, -56px) rotate(0deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Folder Vector Silhouette
+   -------------------------------------------------------------------------- */
+
+.folder-object {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: 155px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.folder-svg-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.folder-stop-1 {
+  stop-color: rgba(42, 45, 56, 0.92);
+}
+
+.folder-stop-2 {
+  stop-color: rgba(26, 28, 36, 0.96);
+}
+
+.folder-stop-3 {
+  stop-color: rgba(16, 16, 20, 0.98);
+}
+
+[data-theme="light"] .folder-stop-1 {
+  stop-color: #FFFFFF;
+}
+
+[data-theme="light"] .folder-stop-2 {
+  stop-color: #F7F7F4;
+}
+
+[data-theme="light"] .folder-stop-3 {
+  stop-color: #F1F1ED;
+}
+
+.folder-inner-content {
+  position: absolute;
+  inset: 0;
+  padding: 14px 22px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.folder-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.folder-number-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  line-height: 1;
+  margin-left: 4px;
+}
+
+.folder-category-label {
+  position: absolute;
+  top: 36px;
+  right: 12px;
+  transform: translateY(-50%);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.folder-category-label span {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--folder-cat-color);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--folder-cat-bg);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-glass);
+}
+
+.folder-main-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-bottom: 2px;
+}
+
+.folder-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.folder-main-title {
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  color: var(--folder-title);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.folder-main-subtitle {
+  font-size: var(--text-caption);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  margin: 0;
+}
+
+.folder-circle-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  border: 1.5px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  transition: background-color 300ms ease, border-color 300ms ease, transform 300ms ease, color 300ms ease;
+  box-shadow: 0 4px 14px rgba(108, 99, 255, 0.15);
+}
+
+.folder-arrow-icon {
+  display: inline-block;
+  transition: transform 300ms ease, color 300ms ease;
+}
+
+.project-card:hover .folder-circle-btn {
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.45);
+}
+
+.project-card:hover .folder-arrow-icon {
+  color: #FFFFFF;
+  transform: translate(2px, -2px);
+}
+
+/* --------------------------------------------------------------------------
+   Project Information Area (Caption Style)
+   -------------------------------------------------------------------------- */
+
+.project-info {
+  padding: 1.5rem 0.5rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  transition: none;
+  text-align: center;
+}
+
+.project-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.project-info-title {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+}
+
+.project-info-year {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.project-info-description {
+  font-size: var(--text-small);
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  display: none; /* Hide description in gallery mode for cleaner look */
+}
+
+.project-tags {
+  display: none; /* Hide tags in gallery mode for cleaner look */
+}
+
+/* --------------------------------------------------------------------------
+   Work Page Card Style (Full Card Treatment)
+   -------------------------------------------------------------------------- */
+
+/* Restore card styling for Work page */
+.work-projects-grid .project-card {
+  border-radius: 20px;
+  background-color: var(--folder-card-bg, var(--color-surface));
+  border: 1px solid var(--color-border);
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    transform 500ms cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+.work-projects-grid .project-card:hover {
+  border-color: rgba(108, 99, 255, 0.35);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65), 0 0 28px rgba(108, 99, 255, 0.08);
+}
+
+.work-projects-grid .project-visual-stage {
+  border-radius: 20px 20px 0 0;
+  background-color: var(--folder-bg-stage, var(--color-bg-secondary));
+  transition: background-color var(--transition-normal);
+}
+
+.work-projects-grid .project-info {
+  padding: 1.5rem 1.75rem 1.75rem 1.75rem;
+  background-color: var(--folder-card-bg);
+  border-top: 1px solid var(--color-border);
+  border-radius: 0 0 20px 20px;
+  text-align: left;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.work-projects-grid .project-info-header {
+  justify-content: space-between;
+}
+
+.work-projects-grid .project-info-description {
+  display: block;
+}
+
+.work-projects-grid .project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.work-projects-grid .tag-pill {
+  padding: 0.25rem 0.75rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .file,
+  .project-card,
+  .folder-object,
+  .folder-ambient-glow {
+    transition: none !important;
+  }
+
+  .project-card:hover .file-left,
+  .project-card:hover .file-right,
+  .project-card:hover .file-center,
+  .project-card:hover {
+    transform: none !important;
+  }
+}

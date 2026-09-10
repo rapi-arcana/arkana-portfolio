@@ -1,0 +1,704 @@
+/* ==========================================================================
+   Project Detail Page — Fixed Sidebar + Overview/Visuals Content
+   ========================================================================== */
+
+.project-detail-page {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Back Navigation
+   -------------------------------------------------------------------------- */
+
+.detail-back-nav {
+  padding-block: clamp(1.5rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   Layout: Sidebar + Content
+   -------------------------------------------------------------------------- */
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding-block: clamp(2rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+}
+
+/* Desktop: Two-column layout */
+@media (min-width: 64rem) {
+  .detail-layout {
+    grid-template-columns: 360px 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Left Sidebar — Project Identity
+   -------------------------------------------------------------------------- */
+
+.project-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: clamp(2rem, 4vw, 0);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 64rem) {
+  .project-sidebar {
+    position: sticky;
+    top: 6rem;
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+    padding-right: clamp(2rem, 4vw, 3rem);
+    padding-bottom: 0;
+  }
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 4vw, 2.5rem);
+}
+
+/* Project Identity */
+.project-identity {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.project-category-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.project-category {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.project-context-tag {
+  font-size: 0.625rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  line-height: 1.2;
+}
+
+.project-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.project-subtitle {
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.project-summary {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  margin-top: clamp(0.25rem, 0.5vw, 0.5rem);
+}
+
+/* Project Snapshot */
+.project-snapshot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.snapshot-heading {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.snapshot-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.snapshot-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.snapshot-label {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.snapshot-value {
+  font-size: 0.9375rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   Right Content — Overview / Visuals
+   -------------------------------------------------------------------------- */
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(2rem, 4vw, 0);
+}
+
+@media (min-width: 64rem) {
+  .project-content {
+    padding-top: 0;
+  }
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.tab-button {
+  position: relative;
+  padding: 0.75rem 0;
+  /* Minimum 44px touch target */
+  min-height: 2.75rem;
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-normal);
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  color: var(--color-text-secondary);
+}
+
+.tab-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.tab-button--active {
+  color: var(--color-text);
+}
+
+.tab-button--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+/* Tab Content */
+.tab-content {
+  min-height: 400px;
+}
+
+.tab-panel {
+  animation: tabFadeIn 300ms ease-out;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Overview Tab
+   -------------------------------------------------------------------------- */
+
+.tab-panel--overview {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 4rem);
+  max-width: 68ch;
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.section-heading {
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.section-text {
+  font-size: clamp(1rem, 1.5vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* My Role List */
+.role-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.role-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.role-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.role-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+  flex-shrink: 0;
+  min-width: 1.75rem;
+}
+
+.role-text {
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
+  line-height: 1.5;
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+/* --------------------------------------------------------------------------
+   Visuals Tab
+   -------------------------------------------------------------------------- */
+
+.tab-panel--visuals {
+  display: flex;
+  flex-direction: column;
+}
+
+.visuals-section {
+  width: 100%;
+}
+
+.visuals-heading {
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.visuals-intro {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  max-width: 48ch;
+}
+
+.no-visuals-message {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+/* Visuals Gallery Base */
+.visuals-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+.visual-item {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visual-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Gallery (Portrait Screens)
+   -------------------------------------------------------------------------- */
+
+.visuals-gallery--mobile {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(2rem, 4vw, 2.5rem);
+  max-width: 1100px;
+}
+
+.visuals-gallery--mobile .visual-item {
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.visuals-gallery--mobile .visual-image {
+  max-height: 520px;
+}
+
+/* --------------------------------------------------------------------------
+   Mixed Gallery (Website + Mobile)
+   -------------------------------------------------------------------------- */
+
+.visuals-gallery--mixed {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  max-width: 1200px;
+}
+
+/* First image (website) larger */
+.visuals-gallery--mixed .visual-item:first-child {
+  max-width: 1100px;
+}
+
+.visuals-gallery--mixed .visual-item:first-child .visual-image {
+  max-height: 600px;
+}
+
+/* Subsequent images (mobile) smaller */
+.visuals-gallery--mixed .visual-item:not(:first-child) {
+  max-width: 340px;
+}
+
+.visuals-gallery--mixed .visual-item:not(:first-child) .visual-image {
+  max-height: 500px;
+}
+
+/* --------------------------------------------------------------------------
+   Publication Gallery (Portrait/Square Editorial)
+   -------------------------------------------------------------------------- */
+
+.visuals-gallery--publication {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(2rem, 4vw, 2.5rem);
+  max-width: 1000px;
+}
+
+.visuals-gallery--publication .visual-item {
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.visuals-gallery--publication .visual-image {
+  max-height: 550px;
+}
+
+.visuals-gallery--publication .visual-item:first-child {
+  grid-column: 1 / -1;
+  max-width: 600px;
+}
+
+/* --------------------------------------------------------------------------
+   Social Gallery (Square/Portrait Collection)
+   -------------------------------------------------------------------------- */
+
+.visuals-gallery--social {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(2rem, 4vw, 2.5rem);
+  max-width: 1000px;
+}
+
+.visuals-gallery--social .visual-item {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.visuals-gallery--social .visual-image {
+  max-height: 520px;
+}
+
+/* --------------------------------------------------------------------------
+   Default Gallery (Fallback)
+   -------------------------------------------------------------------------- */
+
+.visuals-gallery--default {
+  max-width: 1000px;
+}
+
+.visuals-gallery--default .visual-item {
+  max-width: 900px;
+}
+
+.visuals-gallery--default .visual-image {
+  max-height: 580px;
+}
+
+/* --------------------------------------------------------------------------
+   Project Navigation
+   -------------------------------------------------------------------------- */
+
+.project-navigation {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2rem);
+  margin-top: clamp(4rem, 8vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 3rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.project-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.project-nav-link:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.project-nav-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.project-nav-prev {
+  text-align: left;
+}
+
+.project-nav-next {
+  text-align: right;
+}
+
+.nav-direction {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.nav-project-name {
+  font-size: 0.9375rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   Not Found State
+   -------------------------------------------------------------------------- */
+
+.project-not-found {
+  padding-block: clamp(4rem, 10vw, 8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 48ch;
+}
+
+.not-found-eyebrow {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.not-found-title {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.not-found-text {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 63.9375rem) {
+  .project-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .project-nav-next {
+    text-align: left;
+  }
+
+  .tab-navigation {
+    gap: var(--space-4);
+    /* Allow horizontal scroll if tabs somehow overflow */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tab-navigation::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile gallery adjustments */
+  .visuals-gallery--mobile {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .visuals-gallery--mobile .visual-image {
+    max-height: 55vh;
+  }
+
+  .visuals-gallery--mixed {
+    align-items: flex-start;
+  }
+
+  .visuals-gallery--mixed .visual-item:first-child .visual-image {
+    max-height: 48vh;
+  }
+
+  /* Mobile portrait images stay portrait, not full-width */
+  .visuals-gallery--mixed .visual-item:not(:first-child) {
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  .visuals-gallery--mixed .visual-item:not(:first-child) .visual-image {
+    max-height: 55vh;
+  }
+
+  .visuals-gallery--publication {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .visuals-gallery--publication .visual-image {
+    max-height: 58vh;
+  }
+
+  .visuals-gallery--social {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .visuals-gallery--social .visual-image {
+    max-height: 56vh;
+  }
+
+  .visuals-gallery--default .visual-image {
+    max-height: 54vh;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-button,
+  .back-link,
+  .project-nav-link {
+    transition: none !important;
+  }
+
+  .tab-panel {
+    animation: none !important;
+  }
+
+  @keyframes tabFadeIn {
+    from, to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

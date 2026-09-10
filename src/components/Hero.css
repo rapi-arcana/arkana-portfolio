@@ -1,0 +1,633 @@
+/* ==========================================================================
+   Hero Section Styling
+   ========================================================================== */
+
+.hero-section {
+  background-color: var(--color-bg);
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layer 2: Subtle Digital Design Canvas Square Grid */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--color-hero-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-hero-grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center center;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, rgba(0, 0, 0, 0.95) 10%, rgba(0, 0, 0, 0.35) 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, rgba(0, 0, 0, 0.95) 10%, rgba(0, 0, 0, 0.35) 65%, transparent 100%);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Layer 3: Interactive Mouse-Following Spotlight (Desktop Pointer Devices Only) */
+.hero-mouse-light {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: var(--mouse-light-opacity, 0);
+  transition: opacity 400ms ease;
+  background: radial-gradient(
+    circle 420px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--color-mouse-light-center) 0%,
+    var(--color-mouse-light-glow) 25%,
+    transparent 80%
+  );
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero-mouse-light {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mouse-light {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Hero Content
+   -------------------------------------------------------------------------- */
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Eyebrow Label */
+.hero-eyebrow {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.hero-eyebrow-divider {
+  opacity: 0.4;
+  user-select: none;
+}
+
+/* Main Headline */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 7.5vw, 6.5rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  margin-bottom: var(--space-5);
+}
+
+.hero-title-dot {
+  color: var(--color-accent);
+}
+
+/* Description Group */
+.hero-description-group {
+  max-width: 52ch;
+  margin-bottom: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.hero-description-main {
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+.hero-description-sub {
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* CTA Actions */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.9375rem 1.875rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.btn-arrow {
+  display: inline-block;
+  transition: transform var(--transition-normal);
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.btn-primary {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border: 1px solid var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.35);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-hover);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Hero Visual Frame & Floating Cards
+   -------------------------------------------------------------------------- */
+
+.hero-visual-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding-inline: 45px;
+  /* Contain floating cards within this wrapper on mobile */
+  overflow: visible;
+}
+
+.hero-portrait-frame {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
+}
+
+/* Layer 3: Soft Indigo Atmospheric Glow behind Portrait */
+.hero-portrait-frame::before {
+  content: '';
+  position: absolute;
+  inset: -50px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    var(--color-hero-glow) 0%,
+    transparent 75%
+  );
+  filter: blur(36px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orbit background circle */
+.hero-orbit-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 135%;
+  height: 135%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Portrait Card */
+.hero-portrait-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.hero-portrait-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.hero-portrait-img.is-loaded {
+  opacity: 1;
+}
+
+/* Placeholder */
+.hero-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+.placeholder-icon-wrapper {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.placeholder-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.placeholder-title {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.placeholder-subtitle {
+  font-size: var(--text-caption);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Floating Liquid Glass Cards (Refined Composition)
+   -------------------------------------------------------------------------- */
+
+.hero-portrait-frame .hero-glass-card {
+  position: absolute !important;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: 1rem;
+  background: var(--color-surface-glass);
+  border: 1px solid var(--color-border-glass);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  user-select: none;
+  white-space: nowrap;
+  animation: heroFloat 5.5s ease-in-out infinite alternate;
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+/* Hover effects: desktop pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .hero-portrait-frame .hero-glass-card:hover {
+    z-index: 25;
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Card Text Group */
+.card-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.card-sub {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Icon Container */
+.card-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Floating Card Positions & Subtle Color Accents */
+
+/* 1. Figma Card (Upper-Left side of portrait) - subtle indigo accent */
+.hero-portrait-frame .card-figma {
+  top: 12%;
+  left: -35px;
+  animation-duration: 5.5s;
+  animation-delay: 0s;
+  border-color: rgba(108, 99, 255, 0.22);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-portrait-frame .card-figma:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 14px 36px rgba(108, 99, 255, 0.20);
+  }
+}
+
+/* 2. Canva Card (Upper-Right side of portrait) - subtle indigo accent */
+.hero-portrait-frame .card-canva {
+  top: 25%;
+  right: -35px;
+  animation-duration: 6s;
+  animation-delay: 0.8s;
+  border-color: rgba(108, 99, 255, 0.16);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-portrait-frame .card-canva:hover {
+    border-color: rgba(108, 99, 255, 0.4);
+    box-shadow: 0 14px 36px rgba(108, 99, 255, 0.15);
+  }
+}
+
+/* 3. Web & Mobile Card (Lower-Left side of portrait) - subtle glass accent */
+.hero-portrait-frame .card-web-mobile {
+  bottom: 12%;
+  left: -40px;
+  animation-duration: 5.2s;
+  animation-delay: 1.5s;
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-portrait-frame .card-web-mobile:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 14px 36px rgba(108, 99, 255, 0.20);
+  }
+}
+
+/* Subtle Float Motion */
+@keyframes heroFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 30rem) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 59.999rem) {
+  .hero-section::before {
+    background-size: 48px 48px;
+  }
+
+  .hero-visual-wrapper {
+    padding-inline: 30px;
+  }
+
+  .hero-portrait-frame {
+    max-width: 360px;
+  }
+
+  .hero-portrait-frame .card-figma {
+    top: 10%;
+    left: -25px;
+    padding: 0.65rem 0.95rem;
+  }
+
+  .hero-portrait-frame .card-canva {
+    top: 22%;
+    right: -25px;
+    padding: 0.65rem 0.95rem;
+  }
+
+  .hero-portrait-frame .card-web-mobile {
+    bottom: 10%;
+    left: -30px;
+    padding: 0.65rem 0.95rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .hero-section::before {
+    background-size: 38px 38px;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  }
+
+  .hero-portrait-frame::before {
+    inset: -30px;
+    background: radial-gradient(
+      circle at 50% 45%,
+      rgba(108, 99, 255, 0.10) 0%,
+      transparent 70%
+    );
+    filter: blur(24px);
+  }
+
+  .hero-visual-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hero-portrait-frame {
+    max-width: 300px;
+  }
+
+  /* Pull cards in tightly so they don't overflow viewport */
+  .hero-portrait-frame .card-figma {
+    top: 8%;
+    left: -12px;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .hero-portrait-frame .card-canva {
+    top: 20%;
+    right: -12px;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .hero-portrait-frame .card-web-mobile {
+    bottom: 8%;
+    left: -16px;
+    padding: 0.55rem 0.8rem;
+  }
+
+  .hero-orbit-svg {
+    display: none;
+  }
+
+  /* Reduce card text size on very small screens */
+  .card-title {
+    font-size: 0.85rem;
+  }
+
+  .card-sub {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero-container {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(3rem, 6vw, 5.5rem);
+  }
+
+  .hero-visual-wrapper {
+    justify-content: flex-end;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Entrance Sequence & Scroll Parallax
+   -------------------------------------------------------------------------- */
+
+.hero-enter {
+  animation: heroEntrance 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-1 { animation-delay: 50ms; }
+.hero-enter-2 { animation-delay: 130ms; }
+.hero-enter-3 { animation-delay: 210ms; }
+.hero-enter-4 { animation-delay: 280ms; }
+.hero-enter-5 { animation-delay: 350ms; }
+.hero-enter-6 { animation-delay: 420ms; }
+.hero-enter-7 { animation-delay: 490ms; }
+.hero-enter-8 { animation-delay: 560ms; }
+.hero-enter-9 { animation-delay: 630ms; }
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Portrait Card Parallax Transform */
+.hero-portrait-card {
+  transform: translateY(var(--portrait-scroll-y, 0px));
+}
+
+/* Floating Card Scroll Parallax Transforms */
+.hero-portrait-frame .card-figma {
+  transform: translateY(var(--figma-scroll-y, 0px));
+}
+
+.hero-portrait-frame .card-canva {
+  transform: translateY(var(--canva-scroll-y, 0px));
+}
+
+.hero-portrait-frame .card-web-mobile {
+  transform: translateY(var(--web-mobile-scroll-y, 0px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-portrait-card,
+  .btn,
+  .btn-arrow,
+  .hero-portrait-img,
+  .hero-glass-card {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .hero-portrait-card:hover,
+  .hero-glass-card:hover {
+    transform: none !important;
+  }
+}

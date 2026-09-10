@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Career Index / Experience Section Styling — STEP 17.27
+   ========================================================================== */
+
+.experience-section {
+  background-color: var(--color-bg-secondary);
+  padding-block: var(--section-space);
+  position: relative;
+  border-top: 1px solid var(--color-border);
+}
+
+.experience-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* --------------------------------------------------------------------------
+   Header & Records Badge
+   -------------------------------------------------------------------------- */
+
+.experience-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.experience-header-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.experience-label {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.experience-records-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-glass);
+}
+
+.experience-title {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* --------------------------------------------------------------------------
+   Editorial Career Index List
+   -------------------------------------------------------------------------- */
+
+.career-index-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.career-index-row {
+  position: relative;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-normal);
+  /* CRITICAL: Ensure row is ALWAYS visible */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.career-index-row:last-child {
+  border-bottom: none;
+}
+
+.career-index-row--expanded {
+  background-color: var(--color-surface);
+}
+
+.career-index-row--expanded::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--color-accent);
+  transition: opacity var(--transition-normal);
+}
+
+/* Trigger Row Button (Always Mounted & Interactive) */
+.career-index-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+  /* Minimum comfortable touch target */
+  min-height: 3rem;
+  padding: clamp(1.75rem, 3.5vw, 2.25rem) var(--space-4);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-text);
+  font-family: inherit;
+  transition: background-color var(--transition-fast);
+}
+
+.career-index-trigger:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.career-index-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.career-index-row:hover .career-index-num,
+.career-index-row--expanded .career-index-num {
+  color: var(--color-accent);
+}
+
+.career-index-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.career-index-role {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  transition: color var(--transition-fast);
+}
+
+.career-index-row:hover .career-index-role {
+  color: var(--color-text);
+}
+
+.career-index-org {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-weight: var(--weight-medium);
+}
+
+.org-dot {
+  opacity: 0.4;
+  margin-inline: 0.25rem;
+}
+
+.career-index-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.career-index-period {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.career-index-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  font-size: 1.15rem;
+  line-height: 1;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.career-index-trigger:hover .career-index-toggle,
+.career-index-row--expanded .career-index-toggle {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Robust CSS Grid Accordion Animation (Zero Layout Shift / Bug Free)
+   -------------------------------------------------------------------------- */
+
+.career-index-panel-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 350ms cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+}
+
+.career-index-row--expanded .career-index-panel-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.career-index-panel-inner {
+  min-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: 0 var(--space-4) clamp(1.75rem, 3.5vw, 2.25rem) calc(52px + var(--space-4) + var(--space-4));
+  transition: opacity 300ms ease, visibility 300ms ease;
+}
+
+.career-index-row--expanded .career-index-panel-inner {
+  opacity: 1;
+  visibility: visible;
+}
+
+.career-index-description {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.career-index-contributions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border);
+}
+
+.career-index-contributions-title {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.career-index-contributions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.career-index-contribution-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: var(--text-small);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.contribution-bullet {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 47.999rem) {
+  .career-index-trigger {
+    grid-template-columns: 36px 1fr;
+    row-gap: var(--space-2);
+    padding-inline: var(--space-3);
+  }
+
+  .career-index-meta {
+    grid-column: 2 / -1;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  /* Ensure period/date doesn't clip at 320px */
+  .career-index-period {
+    font-size: var(--text-caption);
+    white-space: normal;
+  }
+
+  .career-index-panel-inner {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career-index-panel-wrapper,
+  .career-index-panel-inner {
+    transition: none !important;
+  }
+
+  .career-index-trigger,
+  .career-index-num,
+  .career-index-role,
+  .career-index-toggle {
+    transition: none !important;
+  }
+}

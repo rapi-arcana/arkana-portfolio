@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Design Process Section Styling
+   ========================================================================== */
+
+.process-section {
+  background-color: var(--color-bg-secondary);
+  padding-block: var(--section-space);
+  position: relative;
+  border-top: 1px solid var(--color-border);
+}
+
+.process-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+/* --------------------------------------------------------------------------
+   Left Column: Header
+   -------------------------------------------------------------------------- */
+
+.process-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 48ch;
+}
+
+.process-label {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.process-title {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.process-description {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Process Steps List
+   -------------------------------------------------------------------------- */
+
+.process-steps-wrapper {
+  width: 100%;
+}
+
+.process-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.process-step-item {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  outline: none;
+  /* CRITICAL: Force visibility to prevent hover bug */
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition:
+    border-color var(--transition-normal),
+    background-color var(--transition-normal),
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.process-step-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.process-step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.process-step-num {
+  font-size: var(--text-small);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), font-weight var(--transition-fast);
+}
+
+.process-step-title {
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.process-step-indicator {
+  margin-left: auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.process-step-text {
+  font-size: var(--text-small);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  padding-left: 2.75rem;
+  transition: color var(--transition-fast);
+}
+
+/* Active & Hover Emphasis */
+.process-step-item--active {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+}
+
+/* Hover: desktop pointer only */
+@media (hover: hover) and (pointer: fine) {
+  .process-step-item:hover {
+    background-color: var(--color-surface-hover);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    /* Use translateY instead of translateX to avoid conflicts */
+    transform: translateY(-3px);
+  }
+
+  .process-step-item:hover .process-step-num {
+    color: var(--color-accent);
+    font-weight: var(--weight-bold);
+  }
+
+  .process-step-item:hover .process-step-text {
+    color: var(--color-text);
+  }
+
+  .process-step-item:hover .process-step-indicator {
+    background-color: var(--color-accent);
+    transform: scale(1.25);
+  }
+}
+
+.process-step-item--active .process-step-num {
+  color: var(--color-accent);
+  font-weight: var(--weight-bold);
+}
+
+.process-step-item--active .process-step-text {
+  color: var(--color-text);
+}
+
+.process-step-item--active .process-step-indicator {
+  background-color: var(--color-accent);
+  transform: scale(1.25);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries & Motion
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 64rem) {
+  .process-container {
+    grid-template-columns: 0.38fr 0.62fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: flex-start;
+  }
+
+  .process-header {
+    position: sticky;
+    top: 6rem;
+  }
+}
+
+@media (max-width: 32rem) {
+  .process-step-text {
+    padding-left: 0;
+    margin-top: var(--space-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-step-item,
+  .process-step-num,
+  .process-step-text,
+  .process-step-indicator {
+    transition: none !important;
+  }
+
+  .process-step-item--active,
+  .process-step-item:hover {
+    transform: none;
+  }
+}

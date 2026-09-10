@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Collaboration CTA Section Styling
+   ========================================================================== */
+
+.collaboration-cta-section {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  padding-block: var(--section-space);
+  position: relative;
+  border-top: 1px solid var(--color-border);
+}
+
+.collaboration-cta-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collaboration-cta-card {
+  width: 100%;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  /* Use theme-aware variables instead of hardcoded dark color */
+  background: var(--color-surface-glass);
+  border: 1px solid var(--color-border-glass);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+}
+
+.collaboration-cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+.collaboration-cta-eyebrow {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.collaboration-cta-heading {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.collaboration-cta-text {
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.collaboration-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  width: 100%;
+}
+
+.collaboration-cta-actions .btn-primary {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border: 1px solid var(--color-text);
+}
+
+.collaboration-cta-actions .btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.35);
+}
+
+.collaboration-cta-actions .btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-border-hover);
+  color: var(--color-text);
+}
+
+.collaboration-cta-actions .btn-secondary:hover {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 30rem) {
+  .collaboration-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collaboration-cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
