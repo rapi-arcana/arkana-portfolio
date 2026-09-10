@@ -50,19 +50,8 @@ function Navbar() {
           MR.
         </Link>
 
-        {/* Always-visible: Menu toggle + Theme toggle */}
+        {/* Always-visible on mobile: Theme toggle (left) + Hamburger (right) */}
         <div className="site-nav-mobile-actions">
-          <button
-            className="menu-toggle"
-            type="button"
-            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={isMenuOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            <span>{isMenuOpen ? 'Close' : 'Menu'}</span>
-          </button>
-
           <button
             type="button"
             className="theme-toggle interactive"
@@ -87,6 +76,19 @@ function Navbar() {
                 <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
               </svg>
             )}
+          </button>
+
+          <button
+            className="mobile-menu-toggle interactive"
+            type="button"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span className="hamburger-line" aria-hidden="true" />
+            <span className="hamburger-line" aria-hidden="true" />
+            <span className="hamburger-line" aria-hidden="true" />
           </button>
         </div>
 
