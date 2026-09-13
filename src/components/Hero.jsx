@@ -17,7 +17,7 @@ function Hero() {
   const profileSrc = profileImage
 
   return (
-    <section className="hero-section" ref={heroRef} aria-labelledby="hero-title">
+    <section className="hero-section" id="home" ref={heroRef} aria-labelledby="hero-title">
       {/* Interactive Mouse-Following Spotlight Layer */}
       <div className="hero-mouse-light" aria-hidden="true" />
 
@@ -47,12 +47,26 @@ function Hero() {
           </div>
 
           <div className="hero-actions hero-enter hero-enter-5">
-            <Link className="btn btn-primary interactive" to="/work">
+            <a
+              className="btn btn-primary interactive"
+              href="#work"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               View My Work <span className="btn-arrow" aria-hidden="true">→</span>
-            </Link>
-            <Link className="btn btn-secondary glass interactive" to="/about">
+            </a>
+            <a
+              className="btn btn-secondary glass interactive"
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault()
+                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               About Me <span className="btn-arrow" aria-hidden="true">→</span>
-            </Link>
+            </a>
           </div>
         </div>
 

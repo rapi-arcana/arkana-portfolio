@@ -30,7 +30,7 @@ function ProjectDetail() {
         <p className="not-found-eyebrow">404 Error</p>
         <h1 className="not-found-title">Project Not Found</h1>
         <p className="not-found-text">The requested project does not exist in the portfolio data.</p>
-        <Link to="/work" className="btn btn-primary interactive">
+        <Link to="/#work" className="btn btn-primary interactive">
           ← Back to Work
         </Link>
       </div>
@@ -50,7 +50,7 @@ function ProjectDetail() {
       {/* Back to Work */}
       <nav className="detail-back-nav">
         <div className="container">
-          <Link to="/work" className="back-link">
+          <Link to="/#work" className="back-link">
             ← Back to Work
           </Link>
         </div>

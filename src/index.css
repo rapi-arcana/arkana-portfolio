@@ -143,14 +143,15 @@
 html {
   min-width: 320px;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  scroll-padding-top: 5.5rem;
+  overflow-x: clip;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--color-bg);
   color: var(--color-text-secondary);
   font-size: var(--text-body);

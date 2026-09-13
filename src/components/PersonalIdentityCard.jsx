@@ -7,7 +7,6 @@ export function PersonalIdentityCard() {
   const [imgError, setImgError] = useState(false)
   const wrapperRef = useRef(null)
 
-  // Handle subtle 3D mouse pointer tilt (Desktop fine pointers only)
   function handlePointerMove(e) {
     if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -21,7 +20,6 @@ export function PersonalIdentityCard() {
     const centerX = rect.width / 2
     const centerY = rect.height / 2
 
-    // Restrained rotation: rotateX ±4deg, rotateY ±5deg
     const rotateX = -((y - centerY) / centerY) * 4
     const rotateY = ((x - centerX) / centerX) * 5
 
@@ -57,23 +55,21 @@ export function PersonalIdentityCard() {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      aria-label="Interactive personal identity card. Click or press Enter to flip between identity and currently exploring."
+      aria-label="Interactive personal identity card. Click or press Enter to flip card."
       aria-expanded={isFlipped}
     >
-      {/* 3D Tilt Container Layer */}
       <div className="identity-card-tilt">
-        {/* 3D Inner Flip Element */}
         <div className={`identity-card-inner ${isFlipped ? 'is-flipped' : ''}`}>
-          
+
           {/* ================= FRONT SIDE ================= */}
           <div className="identity-card-face identity-card-front glass">
-            {/* Lanyard Hole Clip Graphic */}
+            {/* Lanyard Clip Hole */}
             <div className="identity-card-clip" aria-hidden="true">
               <span className="id-card-hole" />
             </div>
 
-            {/* Header / Badges */}
-            <div className="identity-card-header">
+            {/* Card Top Header */}
+            <div className="id-header-row">
               <div className="id-brand-tag">
                 <span className="id-badge-prefix">MR.</span>
                 <span className="id-badge-title">DESIGNER ID</span>
@@ -84,106 +80,111 @@ export function PersonalIdentityCard() {
               </span>
             </div>
 
-            {/* Photo & Main Identity Group */}
-            <div className="identity-front-main">
-              <div className="id-photo-frame">
-                {!imgError ? (
-                  <img
-                    src={profileImage}
-                    alt="Mohammad Rafi Arkana Raihan"
-                    className="id-photo-img"
-                    onError={() => setImgError(true)}
-                  />
-                ) : (
-                  <div className="id-photo-placeholder">
-                    <svg className="id-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </div>
-                )}
-              </div>
+            {/* Photo - Large Focal Point */}
+            <div className="id-photo-frame">
+              {!imgError ? (
+                <img
+                  src={profileImage}
+                  alt="Mohammad Rafi Arkana Raihan"
+                  className="id-photo-img"
+                  onError={() => setImgError(true)}
+                />
+              ) : (
+                <div className="id-photo-placeholder">
+                  <svg className="id-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+              )}
+            </div>
 
-              <div className="id-details">
-                <h3 className="id-name">
-                  MOHAMMAD RAFI<br />
-                  ARKANA RAIHAN
-                </h3>
-                <p className="id-role">UI/UX &amp; VISUAL DESIGNER</p>
-                <p className="id-origin">INFORMATICS · INDONESIA</p>
+            {/* Name & Role */}
+            <div className="id-person-info">
+              <h3 className="id-name">
+                MOHAMMAD RAFI ARKANA RAIHAN
+              </h3>
+              <p className="id-role">UI/UX &amp; VISUAL DESIGNER</p>
+            </div>
+
+            <div className="id-divider" />
+
+            {/* Education, GPA & Cum Laude */}
+            <div className="id-section-group">
+              <span className="id-sub-label">EDUCATION</span>
+              <p className="id-degree">S1 INFORMATIKA</p>
+              <p className="id-institution">Universitas Muhammadiyah Malang</p>
+              <div className="id-pills-row">
+                <span className="id-pill">GPA 3.90 / 4.00</span>
+                <span className="id-pill id-pill--accent">● CUM LAUDE</span>
               </div>
             </div>
 
-            {/* Divider Line */}
-            <div className="id-card-divider" />
+            <div className="id-divider" />
 
-            {/* Footer Metadata & Click to Flip Affordance */}
-            <div className="identity-card-footer">
-              <div className="id-discipline-tag">
-                <span>UI/UX • VISUAL • DIGITAL</span>
-              </div>
-              <div className="id-flip-hint">
-                <span>FLIP CARD ↻</span>
-              </div>
+            {/* Location */}
+            <div className="id-section-group">
+              <span className="id-sub-label">LOCATION</span>
+              <p className="id-location-text">Malang, Indonesia</p>
             </div>
 
-            {/* Corner Card Index Indicator */}
-            <span className="id-card-corner-num" aria-hidden="true">01 / 02</span>
+            <div className="id-divider" />
+
+            {/* Card Index & Flip Hint */}
+            <div className="id-card-footer">
+              <span className="id-card-corner-num" aria-hidden="true">01 / 02</span>
+              <span className="id-flip-hint">FLIP CARD →</span>
+            </div>
           </div>
 
           {/* ================= BACK SIDE ================= */}
           <div className="identity-card-face identity-card-back glass">
-            {/* Lanyard Hole Clip Graphic */}
+            {/* Lanyard Clip Hole */}
             <div className="identity-card-clip" aria-hidden="true">
               <span className="id-card-hole" />
             </div>
 
-            {/* Back Header */}
-            <div className="identity-back-header">
-              <span className="id-back-label">CURRENTLY EXPLORING</span>
+            {/* Back Top Content Block */}
+            <div className="id-back-content">
+              {/* Back Header */}
+              <div className="id-back-header">
+                <h4 className="id-back-title">CURRENTLY EXPLORING</h4>
+                <p className="id-back-subtitle">
+                  Core design and technological directions currently under active exploration and development.
+                </p>
+              </div>
+
+              <div className="id-divider" />
+
+              {/* 5 Compact Exploring Rows */}
+              <div className="id-exploring-rows">
+                <div className="id-exploring-row">
+                  <span className="id-row-num">01</span>
+                  <span className="id-row-text">UI/UX DESIGN</span>
+                </div>
+                <div className="id-exploring-row">
+                  <span className="id-row-num">02</span>
+                  <span className="id-row-text">VISUAL DESIGN</span>
+                </div>
+                <div className="id-exploring-row">
+                  <span className="id-row-num">03</span>
+                  <span className="id-row-text">CREATIVE TECHNOLOGY</span>
+                </div>
+                <div className="id-exploring-row">
+                  <span className="id-row-num">04</span>
+                  <span className="id-row-text">BRANDING</span>
+                </div>
+                <div className="id-exploring-row">
+                  <span className="id-row-num">05</span>
+                  <span className="id-row-text">DIGITAL PRODUCTS</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Back Footer */}
+            <div className="id-card-footer">
               <span className="id-card-corner-num" aria-hidden="true">02 / 02</span>
-            </div>
-
-            {/* 4 Exploration Areas List */}
-            <div className="id-exploring-grid">
-              <div className="id-exploring-item">
-                <div className="id-exploring-num">01</div>
-                <div className="id-exploring-content">
-                  <h4 className="id-exploring-title">UI/UX DESIGN</h4>
-                  <p className="id-exploring-desc">Designing clearer and more intuitive digital experiences.</p>
-                </div>
-              </div>
-
-              <div className="id-exploring-item">
-                <div className="id-exploring-num">02</div>
-                <div className="id-exploring-content">
-                  <h4 className="id-exploring-title">VISUAL DESIGN</h4>
-                  <p className="id-exploring-desc">Exploring visual systems, composition, and digital aesthetics.</p>
-                </div>
-              </div>
-
-              <div className="id-exploring-item">
-                <div className="id-exploring-num">03</div>
-                <div className="id-exploring-content">
-                  <h4 className="id-exploring-title">BRANDING</h4>
-                  <p className="id-exploring-desc">Exploring identity systems and visual language.</p>
-                </div>
-              </div>
-
-              <div className="id-exploring-item">
-                <div className="id-exploring-num">04</div>
-                <div className="id-exploring-content">
-                  <h4 className="id-exploring-title">CREATIVE TECHNOLOGY</h4>
-                  <p className="id-exploring-desc">Exploring the intersection between design and technology.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Back Footer Action */}
-            <div className="identity-back-footer">
-              <span className="id-back-flip-btn">
-                FLIP TO FRONT ↻
-              </span>
+              <span className="id-flip-hint">FLIP BACK →</span>
             </div>
           </div>
 

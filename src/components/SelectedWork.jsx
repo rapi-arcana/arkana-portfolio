@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import projects from '../data/projects'
 import ProjectCard from './ProjectCard'
@@ -12,6 +12,7 @@ function SelectedWork() {
   const [currentTranslate, setCurrentTranslate] = useState(0)
   const [prevTranslate, setPrevTranslate] = useState(0)
   const galleryRef = useRef(null)
+  const navigate = useNavigate()
 
   useScrollReveal()
 
@@ -117,25 +118,22 @@ function SelectedWork() {
       setActiveIndex(index)
     } else {
       // Center project clicked - navigate to detail
-      window.location.href = `/work/${projects[index].slug}`
+      navigate(`/work/${projects[index].slug}`)
     }
   }
 
   return (
-    <section className="selected-work-section" aria-labelledby="selected-work-heading">
+    <section className="selected-work-section" id="work" aria-labelledby="selected-work-heading">
       <div className="selected-work-container container">
-        {/* Section Header with View All CTA */}
+        {/* Section Header */}
         <div className="selected-work-header reveal-on-scroll">
           <div className="selected-work-header-content">
             <div className="selected-work-title-group">
-              <p className="selected-work-label">Portfolio</p>
+              <p className="selected-work-label">WORK</p>
               <h2 id="selected-work-heading" className="selected-work-title">
                 Selected Work
               </h2>
             </div>
-            <Link className="selected-work-view-all interactive" to="/work">
-              View All Work <span className="btn-arrow" aria-hidden="true">→</span>
-            </Link>
           </div>
           <p className="selected-work-description">
             A selection of recent interfaces, visual designs, and creative work.

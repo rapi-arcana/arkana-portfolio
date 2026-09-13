@@ -5,7 +5,7 @@
 .site-header {
   position: sticky;
   top: var(--space-3);
-  z-index: 100;
+  z-index: 1000;
   width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-width));
   margin: var(--space-3) auto 0;
   padding: 0;

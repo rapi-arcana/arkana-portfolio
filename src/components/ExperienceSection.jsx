@@ -12,7 +12,7 @@ function ExperienceSection() {
   }
 
   return (
-    <section className="experience-section" aria-labelledby="experience-heading">
+    <section className="experience-section" id="experience" aria-labelledby="experience-heading">
       <div className="experience-container container">
         {/* Section Header with Metadata Count Badge */}
         <div className="experience-header reveal-on-scroll">

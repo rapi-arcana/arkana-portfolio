@@ -1,18 +1,20 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import socialLinks from '../data/socials'
 import './Footer.css'
 
 const footerNavItems = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Work', to: '/work' },
-  { label: 'Experience', to: '/experience' },
-  { label: 'Contact', to: '/contact' }
+  { label: 'Home', sectionId: 'home' },
+  { label: 'About', sectionId: 'about' },
+  { label: 'Work', sectionId: 'work' },
+  { label: 'Experience', sectionId: 'experience' },
+  { label: 'Contact', sectionId: 'contact' }
 ]
 
 function Footer() {
   useScrollReveal()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const scrollToTop = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -20,6 +22,22 @@ function Footer() {
       top: 0,
       behavior: prefersReducedMotion ? 'auto' : 'smooth'
     })
+  }
+
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault()
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } })
+    } else {
+      if (sectionId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const el = document.getElementById(sectionId)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
   }
 
   return (
@@ -42,16 +60,14 @@ function Footer() {
             <h3 className="footer-col-title">Navigation</h3>
             <ul className="footer-links-list">
               {footerNavItems.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    end={item.to === '/'}
-                    className={({ isActive }) =>
-                      `footer-nav-link ${isActive ? 'footer-nav-link--active' : ''}`
-                    }
+                <li key={item.sectionId}>
+                  <a
+                    href={`/#${item.sectionId}`}
+                    className="footer-nav-link"
+                    onClick={(e) => handleNavClick(e, item.sectionId)}
                   >
                     {item.label}
-                  </NavLink>
+                  </a>
                 </li>
               ))}
             </ul>

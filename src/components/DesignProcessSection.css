@@ -1,216 +1,204 @@
 /* ==========================================================================
-   Design Process Section Styling
+   Design Process Section Styling (STEP 10 — Redesign)
    ========================================================================== */
 
 .process-section {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg);
   padding-block: var(--section-space);
   position: relative;
   border-top: 1px solid var(--color-border);
 }
 
 .process-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
 }
 
 /* --------------------------------------------------------------------------
-   Left Column: Header
+   Header — 2-Column Desktop Layout
    -------------------------------------------------------------------------- */
 
 .process-header {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-3);
-  max-width: 48ch;
+  align-items: end;
 }
 
-.process-label {
+@media (min-width: 48rem) {
+  .process-header {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+.process-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.process-eyebrow {
   font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0.08em;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-1);
+  color: var(--color-accent);
 }
 
 .process-title {
-  font-size: var(--text-h2);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: var(--weight-bold);
   color: var(--color-text);
-  line-height: var(--leading-snug);
+  line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
+}
+
+.process-header-right {
+  display: flex;
+  align-items: flex-end;
 }
 
 .process-description {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
   line-height: 1.6;
   color: var(--color-text-secondary);
+  max-width: 44ch;
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
-   Right Column: Process Steps List
+   5 Horizontal Process Cards Grid
    -------------------------------------------------------------------------- */
 
-.process-steps-wrapper {
-  width: 100%;
+.process-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 
-.process-steps-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+/* Tablet (2-3 columns) */
+@media (min-width: 36rem) {
+  .process-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.process-step-item {
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+@media (min-width: 54rem) {
+  .process-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop — 5 Equal-Width Cards in 1 Row */
+@media (min-width: 72rem) {
+  .process-cards-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Process Card Styling (Editorial Minimalist)
+   -------------------------------------------------------------------------- */
+
+.process-card {
+  position: relative;
   border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 2.5vw, 2rem) 1.5rem;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  cursor: pointer;
-  outline: none;
-  /* CRITICAL: Force visibility to prevent hover bug */
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition:
-    border-color var(--transition-normal),
-    background-color var(--transition-normal),
-    transform var(--transition-normal),
-    box-shadow var(--transition-normal);
-}
-
-.process-step-item:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-.process-step-header {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-2);
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 300ms ease,
+              box-shadow 300ms ease,
+              background-color 300ms ease;
+  overflow: hidden;
 }
 
-.process-step-num {
-  font-size: var(--text-small);
+/* Dark Mode Card Surfaces */
+:root:not([data-theme="light"]) .process-card,
+[data-theme="dark"] .process-card {
+  background: rgba(22, 22, 28, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+:root:not([data-theme="light"]) .process-card:hover,
+[data-theme="dark"] .process-card:hover {
+  background: rgba(26, 26, 36, 0.95);
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(108, 99, 255, 0.12);
+}
+
+/* Light Mode Card Surfaces */
+[data-theme="light"] .process-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .process-card:hover {
+  background: #FFFFFF;
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 28px rgba(91, 87, 232, 0.12);
+}
+
+/* Number — Large, Low Contrast Anchor */
+.process-card-num {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-weight: var(--weight-medium);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
+  font-weight: var(--weight-bold);
+  line-height: 1;
   color: var(--color-text-muted);
-  transition: color var(--transition-fast), font-weight var(--transition-fast);
+  opacity: 0.4;
+  letter-spacing: -0.03em;
+  transition: color 300ms ease, opacity 300ms ease;
 }
 
-.process-step-title {
-  font-size: clamp(1.125rem, 2vw, 1.35rem);
-  font-weight: var(--weight-semibold);
+.process-card:hover .process-card-num {
+  color: var(--color-accent);
+  opacity: 0.9;
+}
+
+/* Card Title */
+.process-card-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-weight: var(--weight-bold);
   color: var(--color-text);
-  letter-spacing: var(--tracking-tight);
   margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
-.process-step-indicator {
-  margin-left: auto;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: transparent;
-  transition:
-    background-color var(--transition-fast),
-    transform var(--transition-fast);
-}
-
-.process-step-text {
-  font-size: var(--text-small);
+/* Card Description */
+.process-card-desc {
+  font-size: 0.875rem;
   line-height: 1.6;
   color: var(--color-text-secondary);
   margin: 0;
-  padding-left: 2.75rem;
-  transition: color var(--transition-fast);
-}
-
-/* Active & Hover Emphasis */
-.process-step-item--active {
-  background-color: var(--color-surface-hover);
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
-}
-
-/* Hover: desktop pointer only */
-@media (hover: hover) and (pointer: fine) {
-  .process-step-item:hover {
-    background-color: var(--color-surface-hover);
-    border-color: var(--color-accent);
-    box-shadow: var(--shadow-md);
-    /* Use translateY instead of translateX to avoid conflicts */
-    transform: translateY(-3px);
-  }
-
-  .process-step-item:hover .process-step-num {
-    color: var(--color-accent);
-    font-weight: var(--weight-bold);
-  }
-
-  .process-step-item:hover .process-step-text {
-    color: var(--color-text);
-  }
-
-  .process-step-item:hover .process-step-indicator {
-    background-color: var(--color-accent);
-    transform: scale(1.25);
-  }
-}
-
-.process-step-item--active .process-step-num {
-  color: var(--color-accent);
-  font-weight: var(--weight-bold);
-}
-
-.process-step-item--active .process-step-text {
-  color: var(--color-text);
-}
-
-.process-step-item--active .process-step-indicator {
-  background-color: var(--color-accent);
-  transform: scale(1.25);
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Media Queries & Motion
+   Hover Effects & Reduced Motion
    -------------------------------------------------------------------------- */
 
-@media (min-width: 64rem) {
-  .process-container {
-    grid-template-columns: 0.38fr 0.62fr;
-    gap: clamp(3rem, 6vw, 6rem);
-    align-items: flex-start;
-  }
-
-  .process-header {
-    position: sticky;
-    top: 6rem;
-  }
-}
-
-@media (max-width: 32rem) {
-  .process-step-text {
-    padding-left: 0;
-    margin-top: var(--space-2);
+@media (hover: hover) and (pointer: fine) {
+  .process-card:hover {
+    transform: translateY(-4px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .process-step-item,
-  .process-step-num,
-  .process-step-text,
-  .process-step-indicator {
+  .process-card {
     transition: none !important;
   }
 
-  .process-step-item--active,
-  .process-step-item:hover {
-    transform: none;
+  .process-card:hover {
+    transform: none !important;
   }
 }

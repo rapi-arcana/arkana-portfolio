@@ -1,414 +1,314 @@
 /* ==========================================================================
-   About Page Styling
+   About Page — Polished Layout
    ========================================================================== */
 
 .about-page {
-  padding-bottom: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 
 .about-page-container {
   display: flex;
   flex-direction: column;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
+  gap: clamp(3rem, 5vw, 4.5rem);
 }
 
 /* --------------------------------------------------------------------------
-   Header & Hero
+   Page Header
    -------------------------------------------------------------------------- */
 
 .about-page-header {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  max-width: 72ch;
-  margin-bottom: var(--space-5);
+  max-width: 68ch;
 }
 
 .about-page-eyebrow {
   font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0.08em;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
 }
 
 .about-page-title {
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
   font-weight: var(--weight-bold);
   color: var(--color-text);
   line-height: var(--leading-tight);
   letter-spacing: var(--tracking-tight);
-}
-
-.about-page-subtitle {
-  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-  font-weight: var(--weight-medium);
-  max-width: 60ch;
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
-   Hero Grid: Photo + Bio
+   PROFILE AREA: ID Card + Introduction + Credential Cards
    -------------------------------------------------------------------------- */
 
-.about-hero-grid {
+.about-profile-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+  align-items: start;
 }
 
-/* Real Photo Slot */
-.about-photo-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.about-photo-frame {
-  width: 100%;
-  max-width: 380px;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-border);
-}
-
-.about-photo {
-  width: 100%;
-  height: 140%;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  transition: transform 600ms cubic-bezier(0.34, 1.25, 0.64, 1);
-}
-
-.about-photo-frame:hover .about-photo {
-  transform: scale(1.03);
-}
-
-/* On mobile, constrain photo to viewport-safe size */
-@media (max-width: 30rem) {
-  .about-photo-frame {
-    max-width: min(320px, 90vw);
+@media (min-width: 64rem) {
+  .about-profile-grid {
+    grid-template-columns: 360px 1fr;
+    gap: clamp(3rem, 6vw, 4.5rem);
+    align-items: start;
   }
 }
 
-.about-photo-placeholder {
+.about-card-col {
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+@media (min-width: 64rem) {
+  .about-card-col {
+    position: sticky;
+    top: 6rem;
+    margin-inline: 0;
+  }
+}
+
+.about-intro-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  padding: var(--space-5);
-  text-align: center;
-  color: var(--color-text-muted);
+  gap: clamp(1.5rem, 3vw, 2rem);
+  align-self: start;
+  height: auto;
+  min-height: 0;
+  max-width: 56ch;
+  /* keep the column compact & readable */
 }
 
-.photo-placeholder-icon {
-  width: 4rem;
-  height: 4rem;
-  opacity: 0.5;
+/* Introduction Section */
+.intro-section {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.25rem);
 }
 
-.photo-placeholder-text {
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-text-secondary);
+.intro-label {
+  display: inline-block;
+  width: fit-content;
+  /* shrink to text, never full row */
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+}
+
+.intro-name {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
   margin: 0;
 }
 
-.photo-placeholder-hint {
-  font-size: var(--text-caption);
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-/* Bio Content */
-.about-bio-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.bio-lead-group {
+.intro-narrative {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  max-width: 65ch;
 }
 
-.bio-lead {
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  line-height: 1.55;
+.intro-lead {
+  font-size: clamp(1.0625rem, 1.8vw, 1.125rem);
+  line-height: 1.65;
   color: var(--color-text);
   font-weight: var(--weight-medium);
+  margin: 0;
 }
 
-.bio-text {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.65;
+.intro-text {
+  font-size: clamp(1rem, 1.5vw, 1.0625rem);
+  line-height: 1.7;
   color: var(--color-text-secondary);
-}
-
-.about-bio-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-5);
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
-   Two-Column Editorial Grid
+   Credential Cards (Compact, Directly Below Introduction)
    -------------------------------------------------------------------------- */
 
-.about-two-col-grid {
+.credential-cards {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
-}
-
-.about-section-heading {
-  font-size: var(--text-h3);
-  font-weight: var(--weight-semibold);
-  color: var(--color-text);
-  margin-bottom: var(--space-3);
-  letter-spacing: var(--tracking-tight);
-}
-
-.about-section-text {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.65;
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-3);
-}
-
-.about-location-tag {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
-  font-weight: var(--weight-medium);
-}
-
-.philosophy-quote {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
-  line-height: 1.65;
-  color: var(--color-text);
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--color-text);
-  margin: 0;
-}
-
-/* --------------------------------------------------------------------------
-   Areas of Interest Tags
-   -------------------------------------------------------------------------- */
-
-.interest-tags-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
 }
 
-.interest-tag-item {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 0.625rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-text);
+@media (max-width: 35.9375rem) {
+  .credential-cards {
+    grid-template-columns: 1fr;
+  }
 }
-
-.interest-dot {
-  color: var(--color-text-muted);
-  font-size: 0.85em;
-}
-
-/* --------------------------------------------------------------------------
-   Education & Certification Credentials
-   -------------------------------------------------------------------------- */
 
 .credential-card {
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.5rem;
+  padding: clamp(1rem, 2vw, 1.25rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.credential-card:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
 }
 
 .credential-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  margin-bottom: 0.125rem;
 }
 
-.credential-degree {
-  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
-  font-weight: var(--weight-semibold);
-  color: var(--color-text);
-  margin: 0;
-}
-
-.credential-year {
-  font-size: var(--text-caption);
+.credential-number {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.credential-label {
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
-.credential-institution {
-  font-size: var(--text-small);
-  color: var(--color-text-secondary);
-}
-
-.credential-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.credential-pill {
-  font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
-  padding: 0.25rem 0.625rem;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-}
-
-.credential-pill--accent {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  border-color: rgba(108, 99, 255, 0.3);
-}
-
-.credential-actions {
-  margin-top: var(--space-3);
-}
-
-.credential-cert-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 0.5rem 1.125rem;
-  border-radius: var(--radius-md);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
-  border: 1px solid rgba(108, 99, 255, 0.3);
-  text-decoration: none;
-  transition:
-    background-color var(--transition-normal),
-    border-color var(--transition-normal),
-    transform var(--transition-normal),
-    color var(--transition-normal);
-}
-
-.credential-cert-btn:hover {
-  background: var(--color-accent);
-  color: #ffffff;
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-/* --------------------------------------------------------------------------
-   Currently Exploring Section
-   -------------------------------------------------------------------------- */
-
-.exploring-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-3);
-}
-
-.exploring-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: 1rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-text);
-}
-
-.exploring-bullet {
-  color: var(--color-accent);
-  font-size: 1.125rem;
-  font-weight: var(--weight-bold);
-}
-
-/* --------------------------------------------------------------------------
-   About Page CTA
-   -------------------------------------------------------------------------- */
-
-.about-page-cta {
-  padding: clamp(2rem, 5vw, 4rem);
-  border-radius: var(--radius-xl);
-  text-align: center;
-  margin-top: var(--space-4);
-}
-
-.about-cta-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  max-width: 50ch;
-  margin-inline: auto;
-}
-
-.about-cta-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+.credential-title {
+  font-size: clamp(0.9375rem, 1.5vw, 1rem);
   font-weight: var(--weight-bold);
   color: var(--color-text);
+  line-height: 1.3;
   margin: 0;
 }
 
-.about-cta-sub {
-  font-size: var(--text-small);
+.credential-meta {
+  font-size: 0.8125rem;
+  font-weight: var(--weight-medium);
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  margin: 0;
 }
 
-.about-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
+.credential-link {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  margin-top: var(--space-3);
+  gap: var(--space-2);
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.credential-link:hover {
+  color: var(--color-text);
+}
+
+.credential-link .link-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.credential-link:hover .link-arrow {
+  transform: translateX(3px);
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Media Queries
+   DESIGN PHILOSOPHY
    -------------------------------------------------------------------------- */
 
-@media (min-width: 48rem) {
-  .about-two-col-grid {
-    grid-template-columns: repeat(2, 1fr);
+.about-philosophy-section {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 3.5vw, 2.25rem);
+  padding-top: clamp(2rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.philosophy-header {
+  margin-bottom: 0;
+}
+
+.philosophy-heading {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.philosophy-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-left: clamp(1.5rem, 3vw, 2rem);
+  border-left: 3px solid var(--color-accent);
+  max-width: 68ch;
+}
+
+.philosophy-quote {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.philosophy-text {
+  font-size: clamp(1rem, 1.5vw, 1.0625rem);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 63.9375rem) {
+  .about-profile-grid {
+    gap: clamp(2rem, 4vw, 2.5rem);
   }
 }
 
-@media (min-width: 64rem) {
-  .about-hero-grid {
-    grid-template-columns: 0.4fr 0.6fr;
-    gap: clamp(3rem, 5vw, 4.5rem);
-    align-items: flex-start;
+@media (max-width: 35.9375rem) {
+  .credential-cards {
+    grid-template-columns: 1fr;
   }
+}
 
-  .about-photo-wrapper {
-    position: sticky;
-    top: 6rem;
+/* --------------------------------------------------------------------------
+   Reduced Motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .credential-card,
+  .credential-link,
+  .credential-link .link-arrow {
+    transition: none !important;
   }
 }

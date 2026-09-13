@@ -1,24 +1,45 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
 import './Navbar.css'
 
 const navigationItems = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Work', to: '/work' },
-  { label: 'Experience', to: '/experience' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Home', sectionId: 'home' },
+  { label: 'About', sectionId: 'about' },
+  { label: 'Work', sectionId: 'work' },
+  { label: 'Experience', sectionId: 'experience' },
+  { label: 'Contact', sectionId: 'contact' },
 ]
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   const { theme, toggleTheme } = useTheme()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     function handleScroll() {
       setIsScrolled(window.scrollY > 20)
+
+      if (location.pathname === '/') {
+        const sections = ['home', 'about', 'work', 'experience', 'contact']
+        const scrollPosition = window.scrollY + 200
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = document.getElementById(sections[i])
+          if (section) {
+            const top = section.offsetTop
+            if (scrollPosition >= top) {
+              setActiveSection(sections[i])
+              break
+            }
+          }
+        }
+      } else {
+        setActiveSection('')
+      }
     }
 
     function handleKeyDown(event) {
@@ -37,16 +58,63 @@ function Navbar() {
       window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, [location.pathname])
+
+  // Handle cross-page navigation or hash-based smooth scrolling
+  useEffect(() => {
+    if (location.pathname === '/') {
+      const targetId = location.hash ? location.hash.replace('#', '') : location.state?.scrollTo
+      if (targetId) {
+        setTimeout(() => {
+          if (targetId === 'home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          } else {
+            const el = document.getElementById(targetId)
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' })
+            }
+          }
+        }, 100)
+      }
+    }
+  }, [location])
 
   function closeMenu() {
     setIsMenuOpen(false)
   }
 
+  function handleNavClick(e, sectionId) {
+    e.preventDefault()
+    closeMenu()
+
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } })
+    } else {
+      if (sectionId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        const el = document.getElementById(sectionId)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+  }
+
   return (
     <header className={`site-header${isScrolled ? ' site-header--scrolled' : ''}`}>
       <nav className={`site-nav${isScrolled ? ' site-nav--scrolled' : ''}`} aria-label="Main navigation">
-        <Link className="site-mark" to="/" onClick={closeMenu}>
+        <Link
+          className="site-mark"
+          to="/"
+          onClick={(e) => {
+            closeMenu()
+            if (location.pathname === '/') {
+              e.preventDefault()
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }
+          }}
+        >
           MR.
         </Link>
 
@@ -99,15 +167,14 @@ function Navbar() {
         >
           <ul className="site-nav-links">
             {navigationItems.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  className={({ isActive }) => isActive ? 'nav-link nav-link--active' : 'nav-link'}
-                  end={item.to === '/'}
-                  to={item.to}
-                  onClick={closeMenu}
+              <li key={item.sectionId}>
+                <a
+                  className={activeSection === item.sectionId ? 'nav-link nav-link--active' : 'nav-link'}
+                  href={`/#${item.sectionId}`}
+                  onClick={(e) => handleNavClick(e, item.sectionId)}
                 >
                   {item.label}
-                </NavLink>
+                </a>
               </li>
             ))}
           </ul>

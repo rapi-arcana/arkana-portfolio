@@ -1,227 +1,214 @@
-import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import skillGroups from '../data/skills'
+import skillsData from '../data/skills'
 import './SkillsToolsSection.css'
 
 function SkillsToolsSection() {
   useScrollReveal()
-  const [animated, setAnimated] = useState(false)
-  const sectionRef = useRef(null)
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      setAnimated(true)
-      return
-    }
+  const { header, designCapabilities, tools, technical } = skillsData
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !animated) {
-          setAnimated(true)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [animated])
-
-  const designGroup = skillGroups.find(g => g.id === 'design')
-  const toolsGroup = skillGroups.find(g => g.id === 'tools')
-  const technicalGroup = skillGroups.find(g => g.id === 'technical')
-  const coreGroup = skillGroups.find(g => g.id === 'core')
+  const primaryCapabilities = designCapabilities.filter(item => item.percentage)
+  const secondaryCapabilities = designCapabilities.filter(item => !item.percentage)
 
   return (
     <section 
-      ref={sectionRef}
+      id="skills"
       className="skills-section" 
       aria-labelledby="skills-heading"
     >
       <div className="skills-container container">
+        
         {/* Section Header */}
-        <div className="skills-header reveal-on-scroll">
-          <p className="skills-label">Capabilities</p>
+        <header className="skills-header reveal-on-scroll">
+          <span className="skills-eyebrow">{header.label}</span>
           <h2 id="skills-heading" className="skills-title">
-            Skills &amp; Tools
+            {header.title}
           </h2>
           <p className="skills-description">
-            A selection of tools and disciplines I use to design digital experiences and visual work.
+            {header.description}
           </p>
-        </div>
+        </header>
 
-        {/* Realistic Designer Toolkit */}
-        <div className="toolkit-layout">
-          {/* Design Capabilities - Primary */}
-          <div className="toolkit-section toolkit-design reveal-on-scroll">
-            <div className="toolkit-section-header">
-              <h3 className="toolkit-section-title">{designGroup.title}</h3>
-              <span className="toolkit-section-count">{designGroup.items.length} SKILLS</span>
+        {/* Toolbox Main Grid (Two Columns Desktop) */}
+        <div className="toolbox-main-grid">
+          
+          {/* LEFT COLUMN — DESIGN CAPABILITIES */}
+          <div className="toolbox-column-left reveal-on-scroll">
+            <div className="toolbox-group-header">
+              <span className="toolbox-group-tag">WHAT I CAN DESIGN</span>
+              <h3 className="toolbox-group-title">DESIGN CAPABILITIES</h3>
             </div>
-            <div className="design-capabilities-grid">
-              {designGroup.items.map((skill, index) => (
-                <div
-                  key={skill.name}
-                  className="design-capability-card glass interactive"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <div className="capability-header">
-                    <h4 className="capability-name">{skill.name}</h4>
-                    <span className={`skill-level skill-level--${skill.level.toLowerCase()}`}>
-                      {skill.level}
+
+            {/* Primary Capabilities (01 UI/UX Design & 02 Visual Design) */}
+            <div className="capabilities-primary-stack">
+              {primaryCapabilities.map((item) => (
+                <div key={item.id} className="toolbox-card toolbox-card--primary interactive">
+                  <div className="toolbox-card-header">
+                    <span className="toolbox-card-num">{item.id}</span>
+                    <span className="toolbox-badge toolbox-badge--accent" aria-label={`${item.title} ${item.percentage} percent`}>
+                      {item.percentage}%
                     </span>
                   </div>
-                  <p className="capability-keywords">{skill.keywords}</p>
-                  <div className="skill-proficiency-wrapper">
-                    <div className="skill-proficiency-bar">
-                      <div
-                        className={`skill-proficiency-fill ${animated ? 'animated' : ''}`}
-                        style={{ '--proficiency': `${skill.proficiency}%` }}
-                        role="progressbar"
-                        aria-valuenow={skill.proficiency}
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-label={`${skill.name} proficiency`}
-                      />
-                    </div>
-                    <span className="skill-proficiency-percentage">{skill.proficiency}%</span>
+                  
+                  <div className="toolbox-card-body">
+                    <h4 className="toolbox-card-title">{item.title}</h4>
+                    <p className="toolbox-card-subtitle">{item.subtitle}</p>
+                  </div>
+
+                  {/* Capability Tag Chips */}
+                  <div className="toolbox-chips-flow">
+                    {item.title.includes('UI / UX') && (
+                      <>
+                        <span className="toolbox-chip">WIREFRAMING</span>
+                        <span className="toolbox-chip">USER FLOW</span>
+                        <span className="toolbox-chip">PROTOTYPING</span>
+                      </>
+                    )}
+                    {item.title.includes('VISUAL') && (
+                      <>
+                        <span className="toolbox-chip">HIGH-FIDELITY UI</span>
+                        <span className="toolbox-chip">VISUAL SYSTEM</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Secondary Capabilities (03, 04, 05, 06 Compact Slots) */}
+            <div className="capabilities-secondary-matrix">
+              {secondaryCapabilities.map((item) => (
+                <div key={item.id} className="toolbox-slot-row interactive">
+                  <span className="toolbox-slot-num">{item.id}</span>
+                  <div className="toolbox-slot-meta">
+                    <h4 className="toolbox-slot-title">{item.title}</h4>
+                    <p className="toolbox-slot-subtitle">{item.subtitle}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Tools - Figma Dominant + Canva Supporting */}
-          <div className="toolkit-section toolkit-tools reveal-on-scroll">
-            <div className="toolkit-section-header">
-              <h3 className="toolkit-section-title">{toolsGroup.title}</h3>
+          {/* RIGHT COLUMN — MY TOOLBOX */}
+          <div className="toolbox-column-right reveal-on-scroll reveal-stagger-1">
+            <div className="toolbox-group-header">
+              <span className="toolbox-group-tag">CREATIVE SOFTWARE</span>
+              <h3 className="toolbox-group-title">MY TOOLBOX</h3>
             </div>
-            <div className="tools-container">
-              {/* Figma - Primary Design Tool */}
-              <div className="tool-card tool-card--primary glass interactive">
-                <div className="tool-icon-wrapper tool-icon-wrapper--primary">
-                  <svg viewBox="0 0 38 57" fill="none" className="tool-icon tool-icon--figma" aria-hidden="true">
-                    <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0Z" fill="currentColor" opacity="0.3"/>
-                    <path d="M0 47.5a9.5 9.5 0 0 1 9.5-9.5H19v9.5a9.5 9.5 0 1 1-19 0Z" fill="currentColor" opacity="0.5"/>
-                    <path d="M0 28.5a9.5 9.5 0 0 1 9.5-9.5H19v19H9.5a9.5 9.5 0 0 1-9.5-9.5Z" fill="currentColor" opacity="0.7"/>
-                    <path d="M0 9.5A9.5 9.5 0 0 1 9.5 0H19v19H9.5A9.5 9.5 0 0 1 0 9.5Z" fill="currentColor" opacity="0.85"/>
-                    <path d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19V0Z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <div className="tool-content">
-                  <h4 className="tool-name tool-name--primary">{toolsGroup.primary.name}</h4>
-                  <p className="tool-type">{toolsGroup.primary.type}</p>
-                  <ul className="tool-capabilities">
-                    {toolsGroup.primary.capabilities.map((cap, idx) => (
-                      <li key={idx} className="tool-capability-item">{cap}</li>
-                    ))}
-                  </ul>
-                  <span className={`skill-level skill-level--${toolsGroup.primary.level.toLowerCase()}`}>
-                    {toolsGroup.primary.level}
-                  </span>
-                  <div className="skill-proficiency-wrapper">
-                    <div className="skill-proficiency-bar">
-                      <div
-                        className={`skill-proficiency-fill ${animated ? 'animated' : ''}`}
-                        style={{ '--proficiency': `${toolsGroup.primary.proficiency}%` }}
-                        role="progressbar"
-                        aria-valuenow={toolsGroup.primary.proficiency}
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-label={`${toolsGroup.primary.name} proficiency`}
-                      />
-                    </div>
-                    <span className="skill-proficiency-percentage">{toolsGroup.primary.proficiency}%</span>
+
+            <div className="toolbox-software-stack">
+              {/* Figma — Primary Featured Tool */}
+              <div className="toolbox-card toolbox-software-card toolbox-software-card--figma interactive">
+                <div className="figma-ambient-glow" />
+                <div className="toolbox-card-header">
+                  <div className="software-icon-wrapper software-icon-wrapper--figma" aria-hidden="true">
+                    <svg width="32" height="48" viewBox="0 0 38 57" fill="none">
+                      <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                      <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                      <path d="M0 28.5C0 23.2533 4.25329 19 9.5 19H19V38H9.5C4.25329 38 0 33.7467 0 28.5Z" fill="#A259FF"/>
+                      <path d="M0 9.5C0 4.25329 4.25329 0 9.5 0H19V19H9.5C4.25329 19 0 13.7467 0 9.5Z" fill="#F24E1E"/>
+                      <path d="M19 0H28.5C33.7467 0 38 4.25329 38 9.5C38 14.7467 33.7467 19 28.5 19H19V0Z" fill="#FF7262"/>
+                    </svg>
                   </div>
+                  <div className="software-title-meta">
+                    <span className="software-role-tag software-role-tag--primary">{tools.primary.role}</span>
+                    <h4 className="software-name">{tools.primary.name}</h4>
+                  </div>
+                  <span className="toolbox-badge toolbox-badge--accent">
+                    {tools.primary.percentage}%
+                  </span>
+                </div>
+
+                <div className="software-tags-flow">
+                  {tools.primary.tags.map((tag) => (
+                    <span key={tag} className="software-tag software-tag--primary">{tag}</span>
+                  ))}
                 </div>
               </div>
 
-              {/* Canva - Supporting Tool */}
-              <div className="tool-card tool-card--supporting glass interactive">
-                <div className="tool-icon-wrapper tool-icon-wrapper--supporting">
-                  <svg viewBox="0 0 32 32" fill="none" className="tool-icon tool-icon--canva" aria-hidden="true">
-                    <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="2"/>
-                    <path d="M19.5 13c-.9-1-2.5-1.5-4-1-2.7.8-4 3.6-4 6.3 0 2.7 1.7 4 4 4s4-1.7 4.4-3.6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <div className="tool-content">
-                  <h4 className="tool-name">{toolsGroup.supporting.name}</h4>
-                  <p className="tool-type tool-type--supporting">{toolsGroup.supporting.type}</p>
-                  <p className="tool-uses">{toolsGroup.supporting.uses}</p>
-                  <span className={`skill-level skill-level--${toolsGroup.supporting.level.toLowerCase()}`}>
-                    {toolsGroup.supporting.level}
-                  </span>
-                  <div className="skill-proficiency-wrapper">
-                    <div className="skill-proficiency-bar skill-proficiency-bar--small">
-                      <div
-                        className={`skill-proficiency-fill ${animated ? 'animated' : ''}`}
-                        style={{ '--proficiency': `${toolsGroup.supporting.proficiency}%` }}
-                        role="progressbar"
-                        aria-valuenow={toolsGroup.supporting.proficiency}
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-label={`${toolsGroup.supporting.name} proficiency`}
-                      />
-                    </div>
-                    <span className="skill-proficiency-percentage skill-proficiency-percentage--small">{toolsGroup.supporting.proficiency}%</span>
+              {/* Canva — Supporting Tool */}
+              <div className="toolbox-card toolbox-software-card toolbox-software-card--canva interactive">
+                <div className="toolbox-card-header">
+                  <div className="software-icon-wrapper software-icon-wrapper--canva" aria-hidden="true">
+                    <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+                      <circle cx="16" cy="16" r="15" fill="url(#canvaGradToolbox9G)" />
+                      <path d="M19.5 11.5C18.2 10.2 16.2 9.8 14.3 10.4C11.5 11.3 9.8 14.2 9.8 17.2C9.8 20.2 11.8 22.2 14.5 22.2C17.2 22.2 19.4 20.2 19.8 17.8" stroke="white" strokeWidth="2.4" strokeLinecap="round" />
+                      <defs>
+                        <linearGradient id="canvaGradToolbox9G" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#00C4CC"/>
+                          <stop offset="1" stopColor="#7D2AE8"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
+                  <div className="software-title-meta">
+                    <span className="software-role-tag">{tools.supporting.role}</span>
+                    <h4 className="software-name">{tools.supporting.name}</h4>
+                  </div>
+                  <span className="toolbox-badge toolbox-badge--supporting">
+                    {tools.supporting.percentage}%
+                  </span>
+                </div>
+
+                <div className="software-tags-flow">
+                  {tools.supporting.tags.map((tag) => (
+                    <span key={tag} className="software-tag">{tag}</span>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Technical Skills - Secondary */}
-          <div className="toolkit-section toolkit-technical reveal-on-scroll">
-            <div className="toolkit-section-header">
-              <h3 className="toolkit-section-title">{technicalGroup.title}</h3>
-            </div>
-            <p className="technical-description">{technicalGroup.description}</p>
-            <div className="technical-skills-list">
-              {technicalGroup.items.map((skill) => (
-                <div key={skill.name} className="technical-skill-row">
-                  <div className="technical-skill-info">
-                    <span className="technical-skill-name">{skill.name}</span>
-                    <span className={`skill-level skill-level--${skill.level.toLowerCase()}`}>
-                      {skill.level}
-                    </span>
-                  </div>
-                  <div className="skill-proficiency-wrapper skill-proficiency-wrapper--inline">
-                    <div className="skill-proficiency-bar skill-proficiency-bar--inline">
-                      <div
-                        className={`skill-proficiency-fill ${animated ? 'animated' : ''}`}
-                        style={{ '--proficiency': `${skill.proficiency}%` }}
-                        role="progressbar"
-                        aria-valuenow={skill.proficiency}
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-label={`${skill.name} proficiency`}
-                      />
-                    </div>
-                    <span className="skill-proficiency-percentage skill-proficiency-percentage--inline">{skill.proficiency}%</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+        </div>
+
+        {/* BOTTOM ROW — TECHNICAL SKILLS */}
+        <div className="toolbox-technical-row reveal-on-scroll reveal-stagger-2">
+          <div className="technical-meta">
+            <h3 className="toolbox-group-title">TECHNICAL</h3>
+            <p className="technical-sublabel">{technical.label}</p>
           </div>
 
-          {/* Core Capabilities - Tags */}
-          <div className="toolkit-section toolkit-core reveal-on-scroll">
-            <div className="toolkit-section-header">
-              <h3 className="toolkit-section-title">{coreGroup.title}</h3>
+          <div className="technical-chips-grid">
+            <div className="tech-tool-chip interactive" title="HTML5">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4.5 3L5.8 18.5L12 20.2L18.2 18.5L19.5 3H4.5ZM16.3 7.5H8.7L9 10H16L15.4 15.6L12 16.6L8.6 15.6L8.4 13H6.9L7.3 17.5L12 18.8L16.7 17.5L17.5 7.5H16.3Z" fill="#E34F26"/>
+              </svg>
+              <span>HTML</span>
             </div>
-            <div className="core-capabilities-tags">
-              {coreGroup.items.map((item) => (
-                <span key={item} className="core-capability-tag interactive">
-                  {item}
-                </span>
-              ))}
+
+            <div className="tech-tool-chip interactive" title="CSS3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4.5 3L5.8 18.5L12 20.2L18.2 18.5L19.5 3H4.5ZM16.3 7.5H8.7L9 10H16L15.4 15.6L12 16.6L8.6 15.6L8.4 13H6.9L7.3 17.5L12 18.8L16.7 17.5L17.5 7.5H16.3Z" fill="#1572B6"/>
+              </svg>
+              <span>CSS</span>
+            </div>
+
+            <div className="tech-tool-chip interactive" title="JavaScript">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <rect width="24" height="24" rx="4" fill="#F7DF1E"/>
+                <path d="M12.5 18C12.8 19 13.8 19.8 15.2 19.8C16.8 19.8 17.8 19 17.8 17.5C17.8 14.3 13.3 14.8 13.3 11.6C13.3 9.9 14.7 8.7 16.6 8.7C18 8.7 19.1 9.4 19.6 10.6L18.2 11.4C17.9 10.7 17.3 10.2 16.5 10.2C15.7 10.2 15 10.7 15 11.5C15 14.3 19.5 13.8 19.5 17.2C19.5 19.5 17.7 21.2 15.1 21.2C13.2 21.2 11.8 20.1 11.1 18.6L12.5 18ZM6.2 18.2C6.6 19 7.3 19.8 8.5 19.8C9.6 19.8 10.3 19.2 10.3 17.7V8.9H12V17.8C12 20.5 10.4 21.2 8.4 21.2C6.7 21.2 5.5 20.3 4.8 18.9L6.2 18.2Z" fill="#000000"/>
+              </svg>
+              <span>JavaScript</span>
+            </div>
+
+            <div className="tech-tool-chip interactive" title="Flutter">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M14.3 2.5L5.7 11.1L8.8 14.2L20.5 2.5H14.3ZM14.3 13.2L10.3 17.2L14.3 21.2H20.5L16.5 17.2L20.5 13.2H14.3Z" fill="#02569B"/>
+                <path d="M10.3 17.2L14.3 13.2H8.1L6.1 15.2L10.3 17.2Z" fill="#0175C2"/>
+              </svg>
+              <span>Flutter</span>
+            </div>
+
+            <div className="tech-tool-chip interactive" title="Vue.js">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M2 3.5H7L12 12L17 3.5H22L12 20.5L2 3.5Z" fill="#4FC08D"/>
+                <path d="M6 3.5H9.5L12 8L14.5 3.5H18L12 14L6 3.5Z" fill="#35495E"/>
+              </svg>
+              <span>Vue</span>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )

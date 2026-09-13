@@ -1,100 +1,63 @@
-// Realistic Designer Toolkit Data
-const skillGroups = [
-  {
-    id: 'design',
-    title: 'Design Capabilities',
-    items: [
-      {
-        name: 'UI/UX Design',
-        level: 'CORE',
-        proficiency: 90,
-        keywords: 'Wireframing · User Flow · Prototyping'
-      },
-      {
-        name: 'UI Design',
-        level: 'CORE',
-        proficiency: 90,
-        keywords: 'High-Fidelity UI · Interface Design'
-      },
-      {
-        name: 'Visual Design',
-        level: 'CORE',
-        proficiency: 88,
-        keywords: 'Composition · Visual Systems'
-      },
-      {
-        name: 'Graphic Design',
-        level: 'STRONG',
-        proficiency: 85,
-        keywords: 'Publication · Social Content'
-      },
-      {
-        name: 'Branding',
-        level: 'WORKING',
-        proficiency: 75,
-        keywords: 'Identity · Visual Language'
-      },
-      {
-        name: 'Web Design',
-        level: 'WORKING',
-        proficiency: 75,
-        keywords: 'Interface · Responsive Layout'
-      },
-      {
-        name: 'Social Media Design',
-        level: 'STRONG',
-        proficiency: 85,
-        keywords: 'Feed · Publication · Content Visuals'
-      }
-    ]
+// Skills & Tools Data for Redesigned Editorial Section
+const skillsData = {
+  header: {
+    label: 'CAPABILITIES',
+    title: 'Skills & Tools',
+    description: 'A selection of tools and disciplines I use to design digital experiences and visual work.'
   },
-  {
-    id: 'tools',
-    title: 'Tools',
+  designCapabilities: [
+    {
+      id: '01',
+      title: 'UI / UX DESIGN',
+      subtitle: 'Wireframing · User Flow · Prototyping',
+      percentage: 90
+    },
+    {
+      id: '02',
+      title: 'VISUAL DESIGN',
+      subtitle: 'High-Fidelity UI · Visual System',
+      percentage: 85
+    },
+    {
+      id: '03',
+      title: 'GRAPHIC DESIGN',
+      subtitle: 'Publication · Social Content'
+    },
+    {
+      id: '04',
+      title: 'BRANDING',
+      subtitle: 'Identity · Visual Language'
+    },
+    {
+      id: '05',
+      title: 'WEB DESIGN',
+      subtitle: 'Interface · Responsive Layout'
+    },
+    {
+      id: '06',
+      title: 'SOCIAL MEDIA DESIGN',
+      subtitle: 'Feed · Publication · Content Visuals'
+    }
+  ],
+  tools: {
     primary: {
       name: 'Figma',
-      type: 'PRIMARY DESIGN TOOL',
-      level: 'CORE',
-      proficiency: 90,
-      capabilities: [
-        'Wireframing',
-        'Prototyping',
-        'High-Fidelity UI',
-        'Design System',
-        'Visual Design'
-      ]
+      role: 'Primary Design Tool',
+      tags: ['Wireframing', 'Prototyping', 'High-Fidelity UI', 'Design System'],
+      percentage: 90
     },
     supporting: {
       name: 'Canva',
-      type: 'SUPPORTING TOOL',
-      level: 'WORKING',
-      proficiency: 75,
-      uses: 'References · Visual Elements · Quick Assets'
+      role: 'Supporting Tool',
+      tags: ['Visual Content', 'Publication', 'Quick Visual Assets'],
+      percentage: 70
     }
   },
-  {
-    id: 'technical',
-    title: 'Technical',
-    description: 'Supporting my understanding of how digital products are built',
-    items: [
-      { name: 'HTML', level: 'WORKING', proficiency: 70 },
-      { name: 'CSS', level: 'WORKING', proficiency: 70 },
-      { name: 'JavaScript', level: 'FAMILIAR', proficiency: 60 },
-      { name: 'Flutter', level: 'FAMILIAR', proficiency: 60 },
-      { name: 'Vue', level: 'FAMILIAR', proficiency: 60 }
-    ]
-  },
-  {
-    id: 'core',
-    title: 'Core Capabilities',
-    items: [
-      'Problem Solving',
-      'Communication',
-      'Teamwork',
-      'Time Management',
-      'Attention to Detail'
-    ]
+  technical: {
+    label: 'Supporting my understanding of digital products.',
+    skills: ['HTML', 'CSS', 'JavaScript', 'Flutter', 'Vue']
   }
-]
+}
 
-export default skillGroups
+export default skillsData
+
