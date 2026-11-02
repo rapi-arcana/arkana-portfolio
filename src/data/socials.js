@@ -13,22 +13,6 @@ const socialLinks = [
     href: 'https://linkedin.com/in/placeholder',
     isPlaceholder: true,
     isExternal: true
-  },
-  {
-    id: 'behance',
-    label: 'Behance',
-    value: 'Behance Portfolio',
-    href: 'https://behance.net/placeholder',
-    isPlaceholder: true,
-    isExternal: true
-  },
-  {
-    id: 'dribbble',
-    label: 'Dribbble',
-    value: 'Dribbble Profile',
-    href: 'https://dribbble.com/placeholder',
-    isPlaceholder: true,
-    isExternal: true
   }
 ]
 

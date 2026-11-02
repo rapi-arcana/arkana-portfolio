@@ -25,17 +25,17 @@ const projectVisualPresets = {
   'pesmaba-fakultas-teknik': {
     type: 'publication-poster',
     previews: [
-      { aspect: '3 / 4' },
-      { aspect: '3 / 4' },
-      { aspect: '3 / 4' }
+      { aspect: '4 / 5' },
+      { aspect: '4 / 5' },
+      { aspect: '4 / 5' }
     ]
   },
   'himpunan-kominfo': {
     type: 'social-media-feed',
     previews: [
-      { aspect: '1 / 1' },
-      { aspect: '1 / 1' },
-      { aspect: '1 / 1' }
+      { aspect: '4 / 5' },
+      { aspect: '4 / 5' },
+      { aspect: '4 / 5' }
     ]
   },
   'yourmoney': {
@@ -60,12 +60,16 @@ function ProjectCard({ project, isGalleryMode = false }) {
   const imgs = project.images || []
 
   const previewImages = project.slug === 'pt-bafain-indonesia'
-    ? [cover, imgs[0] || cover, imgs[1] || cover]
-    : [
-        imgs[0] || cover,
-        imgs[1] || imgs[0] || cover,
-        cover
-      ]
+    ? [project.webImages?.[0] || cover, project.mobileImages?.[0] || imgs[0] || cover, cover]
+    : project.slug === 'pesmaba-fakultas-teknik'
+      ? [imgs[0] || cover, imgs[2] || imgs[1] || cover, cover]
+      : project.slug === 'kost-management-app'
+        ? [imgs[2] || imgs[0] || cover, imgs[1] || cover, cover]
+        : [
+          imgs[0] || cover,
+          imgs[1] || imgs[0] || cover,
+          cover
+        ]
 
   const preset = projectVisualPresets[project.slug] || { previews: [] }
 

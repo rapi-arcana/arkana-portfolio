@@ -3,10 +3,49 @@ import kostCover from '../assets/images/projects/kost-management/cover.jpg'
 import kostScreen01 from '../assets/images/projects/kost-management/screen-01.jpg'
 import kostScreen02 from '../assets/images/projects/kost-management/screen-02.jpg'
 import kostScreen03 from '../assets/images/projects/kost-management/screen-03.jpg'
+import kostScreen04 from '../assets/images/projects/kost-management/screen-04.png'
+import kostScreen05 from '../assets/images/projects/kost-management/screen-05.png'
+import kostScreen06 from '../assets/images/projects/kost-management/screen-06.png'
+import kostScreen07 from '../assets/images/projects/kost-management/screen-07.png'
+import kostScreen08 from '../assets/images/projects/kost-management/screen-08.png'
+import kostScreen09 from '../assets/images/projects/kost-management/screen-09.png'
+
 
 import bafainCover from '../assets/images/projects/bafain/cover.jpg'
 import bafainScreen01 from '../assets/images/projects/bafain/screen-01.jpg'
 import bafainScreen02 from '../assets/images/projects/bafain/screen-02.jpg'
+import bafainScreen03 from '../assets/images/projects/bafain/screen-03.png'
+import bafainScreen04 from '../assets/images/projects/bafain/screen-04.png'
+import bafainScreen05 from '../assets/images/projects/bafain/screen-05.png'
+import bafainScreen06 from '../assets/images/projects/bafain/screen-06.png'
+import bafainScreen07 from '../assets/images/projects/bafain/screen-07.png'
+import bafainScreen08 from '../assets/images/projects/bafain/screen-08.png'
+import bafainScreen09 from '../assets/images/projects/bafain/screen-09.png'
+import bafainScreen10 from '../assets/images/projects/bafain/screen-10.png'
+
+
+import pesmabaFeed01 from '../assets/images/projects/pesmaba/feed-01.png'
+import pesmabaFeed02 from '../assets/images/projects/pesmaba/feed-02.png'
+import pesmabaFeed03 from '../assets/images/projects/pesmaba/feed-03.png'
+import pesmabaFeed04 from '../assets/images/projects/pesmaba/feed-04.png'
+import pesmabaFeed05 from '../assets/images/projects/pesmaba/feed-05.png'
+import pesmabaFeed06 from '../assets/images/projects/pesmaba/feed-06.png'
+import pesmabaFeed07 from '../assets/images/projects/pesmaba/feed-07.png'
+import pesmabaFeed08 from '../assets/images/projects/pesmaba/feed-08.png'
+import pesmabaFeed09 from '../assets/images/projects/pesmaba/feed-09.png'
+import pesmabaCover3 from '../assets/images/projects/pesmaba/cover3.png'
+
+import kominfoFeed01 from '../assets/images/projects/kominfo/feed-01.png'
+import kominfoFeed02 from '../assets/images/projects/kominfo/feed-02.png'
+import kominfoFeed03 from '../assets/images/projects/kominfo/feed-03.png'
+import kominfoFeed04 from '../assets/images/projects/kominfo/feed-04.png'
+import kominfoFeed05 from '../assets/images/projects/kominfo/feed-05.png'
+import kominfoFeed06 from '../assets/images/projects/kominfo/feed-06.png'
+import kominfoFeed07 from '../assets/images/projects/kominfo/feed-07.png'
+import kominfoFeed08 from '../assets/images/projects/kominfo/feed-08.png'
+import kominfoFeed09 from '../assets/images/projects/kominfo/feed-09.png'
+import kominfoCover from '../assets/images/projects/kominfo/cover.png'
+
 
 const projects = [
   {
@@ -33,9 +72,15 @@ const projects = [
     alt: 'Kost Management App mobile and web interface design',
     coverImage: kostCover,
     images: [
-      kostScreen01,
+      kostCover,
       kostScreen02,
-      kostScreen03
+      kostScreen01,
+      kostScreen04,
+      kostScreen05,
+      kostScreen06,
+      kostScreen07,
+      kostScreen08,
+      kostScreen09
     ]
   },
   {
@@ -61,6 +106,23 @@ const projects = [
     reflection: 'Aligning stakeholder expectations with modern web usability ensured both corporate authority and clear client conversion paths.',
     alt: 'PT. Bafain Indonesia website and mobile interface redesign',
     coverImage: bafainCover,
+    // Web platform interface (16:10 / 16:9 desktop layout)
+    webImages: [
+      bafainCover,
+      bafainScreen06,
+      bafainScreen07,
+      bafainScreen08
+    ],
+    // Mobile application interface (9:19 smartphone page screens)
+    mobileImages: [
+      bafainScreen01,
+      bafainScreen03,
+      bafainScreen04,
+      bafainScreen05,
+      bafainScreen09,
+      bafainScreen10
+
+    ],
     images: [
       bafainScreen01,
       bafainScreen02
@@ -87,8 +149,18 @@ const projects = [
     ],
     reflection: 'Developing a cohesive visual theme for a large student orientation event required adaptable templates and strict brand consistency across media.',
     alt: 'PESMABA Fakultas Teknik orientation visual identity and publication',
-    coverImage: null,
-    images: []
+    coverImage: pesmabaFeed02,
+    images: [
+      pesmabaFeed01,
+      pesmabaFeed02,
+      pesmabaFeed03,
+      pesmabaFeed04,
+      pesmabaFeed05,
+      pesmabaFeed06,
+      pesmabaFeed07,
+      pesmabaFeed08,
+      pesmabaFeed09,
+    ]
   },
   {
     id: 'himpunan-kominfo',
@@ -111,8 +183,18 @@ const projects = [
     ],
     reflection: 'Designing structured content templates simplified social media publishing while maintaining high visual engagement for organizational updates.',
     alt: 'Himpunan Kominfo social media content and graphic assets',
-    coverImage: null,
-    images: []
+    coverImage: kominfoCover,
+    images: [
+      kominfoFeed01,
+      kominfoFeed02,
+      kominfoFeed03,
+      kominfoFeed04,
+      kominfoFeed05,
+      kominfoFeed06,
+      kominfoFeed07,
+      kominfoFeed08,
+      kominfoFeed09,
+    ]
   },
   {
     id: 'yourmoney',

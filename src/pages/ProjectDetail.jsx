@@ -191,7 +191,53 @@ function ProjectDetail() {
                   <h2 className="visuals-heading">Selected Work</h2>
                   <p className="visuals-intro">A closer look at the interfaces and visual work.</p>
 
-                  {project.images && project.images.length > 0 ? (
+                  {project.webImages || project.mobileImages ? (
+                    <div className="visuals-groups-container">
+                      {project.webImages && project.webImages.length > 0 && (
+                        <div className="visuals-group">
+                          <div className="visuals-group-header">
+                            <span className="visuals-group-pill">DESKTOP / WEB</span>
+                            <h3 className="visuals-group-title">Website Platform</h3>
+                            <p className="visuals-group-desc">Responsive desktop layouts and web management interface.</p>
+                          </div>
+                          <div className="visuals-gallery visuals-gallery--web">
+                            {project.webImages.map((imgSrc, idx) => (
+                              <div key={`web-${idx}`} className="visual-item visual-item--web">
+                                <Image
+                                  src={imgSrc}
+                                  alt={`${project.title} Web Interface ${idx + 1}`}
+                                  loading="lazy"
+                                  className="visual-image"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {project.mobileImages && project.mobileImages.length > 0 && (
+                        <div className="visuals-group">
+                          <div className="visuals-group-header">
+                            <span className="visuals-group-pill">MOBILE APP</span>
+                            <h3 className="visuals-group-title">Mobile Application</h3>
+                            <p className="visuals-group-desc">Mobile interfaces, catalogs, and interactive user flows.</p>
+                          </div>
+                          <div className="visuals-gallery visuals-gallery--mobile">
+                            {project.mobileImages.map((imgSrc, idx) => (
+                              <div key={`mob-${idx}`} className="visual-item visual-item--mobile">
+                                <Image
+                                  src={imgSrc}
+                                  alt={`${project.title} Mobile Screen ${idx + 1}`}
+                                  loading="lazy"
+                                  className="visual-image"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : project.images && project.images.length > 0 ? (
                     <div className={`visuals-gallery visuals-gallery--${galleryType}`}>
                       {project.images.map((imgSrc, idx) => (
                         <div key={idx} className="visual-item">
