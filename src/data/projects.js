@@ -46,6 +46,16 @@ import kominfoFeed08 from '../assets/images/projects/kominfo/feed-08.png'
 import kominfoFeed09 from '../assets/images/projects/kominfo/feed-09.png'
 import kominfoCover from '../assets/images/projects/kominfo/cover.png'
 
+import yourmoneyCover from '../assets/images/projects/yourmoney/cover.png'
+import yourmoneyScreen01 from '../assets/images/projects/yourmoney/screen-01.png'
+import yourmoneyScreen02 from '../assets/images/projects/yourmoney/screen-02.png'
+import yourmoneyScreen03 from '../assets/images/projects/yourmoney/screen-03.png'
+import yourmoneyScreen04 from '../assets/images/projects/yourmoney/screen-04.png'
+import yourmoneyScreen05 from '../assets/images/projects/yourmoney/screen-05.png'
+import yourmoneyScreen06 from '../assets/images/projects/yourmoney/screen-06.png'
+import yourmoneyScreen07 from '../assets/images/projects/yourmoney/screen-07.png'
+import yourmoneyScreen08 from '../assets/images/projects/yourmoney/screen-08.png'
+
 
 const projects = [
   {
@@ -221,8 +231,17 @@ const projects = [
     ],
     reflection: 'Focusing on personal finance management within an academic course allowed exploring intuitive information architecture and clear mobile financial interactions.',
     alt: 'YourMoney mobile personal finance management interface design',
-    coverImage: null,
-    images: []
+    coverImage: yourmoneyCover,
+    images: [
+      yourmoneyScreen01,
+      yourmoneyScreen02,
+      yourmoneyScreen03,
+      yourmoneyScreen04,
+      yourmoneyScreen05,
+      yourmoneyScreen06,
+      yourmoneyScreen07,
+      yourmoneyScreen08
+    ]
   }
 ]
 
