@@ -16,6 +16,20 @@ const experiences = [
   {
     id: '02',
     role: 'UI/UX Designer',
+    organization: 'Universitas Muhammadiyah Malang',
+    location: 'Malang, Jawa Timur, Indonesia',
+    period: 'Sep 2025 – Jan 2026',
+    description: 'Collaborated with a team to design YourMoney, a mobile finance management application based on identified user problems.',
+    contributions: [
+      'Conducted a UX journey to identify problems, understand user needs, and define suitable solutions.',
+      'Developed the user flow, prototype, and high-fidelity UI design.',
+      'Designed 20+ mobile application screens.',
+      'Used Figma as the primary tool for interface design and prototyping.'
+    ]
+  },
+  {
+    id: '03',
+    role: 'UI/UX Designer',
     organization: 'PT. Bafain Indonesia',
     location: 'Malang',
     period: 'Nov 2025 – Dec 2025',
@@ -28,7 +42,7 @@ const experiences = [
     ]
   },
   {
-    id: '03',
+    id: '04',
     role: 'Publication & Design Volunteer',
     organization: 'PESMABA Fakultas Teknik Universitas Muhammadiyah Malang',
     location: 'Malang',
@@ -42,7 +56,7 @@ const experiences = [
     ]
   },
   {
-    id: '04',
+    id: '05',
     role: 'Social Media / Publication & Design',
     organization: 'Himpunan Kominfo',
     location: 'Malang',
